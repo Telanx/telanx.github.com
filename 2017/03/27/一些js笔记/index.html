@@ -95,13 +95,13 @@
 <meta property="og:site_name" content="Telanx">
 <meta property="og:description" content="本文主要内容是笔者学js以来记录的一些问题以及一些使用技巧。大部分都可以在网路上找到，因为时过久远，不保证所有链接都有效.
 生成包含n个元素的数组123456let generateArray = n =&amp;gt; Array(n + 1);                        // 这种网上看到的，比较多了，缺点是不可用map遍历,若非要遍历可以Array(n + 1).join(c).">
-<meta property="og:image" content="http://yoursite.com/../images/figure1.gif">
-<meta property="og:updated_time" content="2017-03-27T06:44:21.976Z">
+<meta property="og:image" content="http://yoursite.com/images/figure1.gif">
+<meta property="og:updated_time" content="2017-03-27T07:23:20.729Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一些js笔记">
 <meta name="twitter:description" content="本文主要内容是笔者学js以来记录的一些问题以及一些使用技巧。大部分都可以在网路上找到，因为时过久远，不保证所有链接都有效.
 生成包含n个元素的数组123456let generateArray = n =&amp;gt; Array(n + 1);                        // 这种网上看到的，比较多了，缺点是不可用map遍历,若非要遍历可以Array(n + 1).join(c).">
-<meta name="twitter:image" content="http://yoursite.com/../images/figure1.gif">
+<meta name="twitter:image" content="http://yoursite.com/images/figure1.gif">
 
 
 
@@ -382,7 +382,7 @@
 <blockquote>
 <p>Every object created by a constructor has an implicit reference (called the object’s prototype) to the value of its constructor’s “prototype” property. Furthermore, a prototype may have a non-null implicit reference to its prototype, and so on; this is called the prototype chain. When a reference is made to a property in an object, that reference is to the property of that name in the first object in the prototype chain that contains a property of that name. In other words, first the object mentioned directly is examined for such a property; if that object contains the named property, that is the property to which the reference refers; if that object does not contain the named property, the prototype for that object is examined next; and so on.    </p>
 </blockquote>
-<p><img src="../images/figure1.gif" alt="Objects"><br>里面的prototype是显式引用,<code>__proto__</code>是隐式引用(部分浏览器支持<code>__proto__</code>),该图指明了这样一个关系:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Constructor.prototype --&gt; constructorPrototype &lt;-- ObjectInst.__proto__</div><div class="line"><span class="comment">// 即每一个由构造函数生成的object都有一个隐式引用__proto__指向构造函数的原型</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">this</span>.a = <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> f1 = <span class="keyword">new</span> F();</div><div class="line">f1.__proto === F.prototype;   <span class="comment">// true</span></div></pre></td></tr></table></figure></p>
+<p><img src="/images/figure1.gif" alt="Objects"><br>里面的prototype是显式引用,<code>__proto__</code>是隐式引用(部分浏览器支持<code>__proto__</code>),该图指明了这样一个关系:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Constructor.prototype --&gt; constructorPrototype &lt;-- ObjectInst.__proto__</div><div class="line"><span class="comment">// 即每一个由构造函数生成的object都有一个隐式引用__proto__指向构造函数的原型</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">this</span>.a = <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> f1 = <span class="keyword">new</span> F();</div><div class="line">f1.__proto === F.prototype;   <span class="comment">// true</span></div></pre></td></tr></table></figure></p>
 <h4 id="ES5里的arguments-caller和callee"><a href="#ES5里的arguments-caller和callee" class="headerlink" title="ES5里的arguments, caller和callee"></a>ES5里的arguments, caller和callee</h4><blockquote>
 <p>注意: callee和caller以及arguments已在ES6里废弃  </p>
 </blockquote>
