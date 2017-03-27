@@ -96,7 +96,7 @@
 <meta property="og:description" content="本文主要内容是笔者学js以来记录的一些问题以及一些使用技巧。大部分都可以在网路上找到，因为时过久远，不保证所有链接都有效.
 生成包含n个元素的数组123456let generateArray = n =&amp;gt; Array(n + 1);                        // 这种网上看到的，比较多了，缺点是不可用map遍历,若非要遍历可以Array(n + 1).join(c).">
 <meta property="og:image" content="http://yoursite.com/images/figure1.gif">
-<meta property="og:updated_time" content="2017-03-27T07:23:20.729Z">
+<meta property="og:updated_time" content="2017-03-27T09:44:20.927Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一些js笔记">
 <meta name="twitter:description" content="本文主要内容是笔者学js以来记录的一些问题以及一些使用技巧。大部分都可以在网路上找到，因为时过久远，不保证所有链接都有效.
@@ -363,16 +363,16 @@
 <p>结果可能跟你想象的不太一样！我的理解是在解释器在进行编译时，执行a.x = a = { n: 2 }时，a均是指向的初始地址{ n: 1 }所处的地址空间，也即b指向的地址.<br>a = { n: 2 }所做的操作即是a重新指向另外一个存储{ n: 2 }的地址.前面已经说过了，a.x指向的仍旧是原来的地址.最后结果就是:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">a = &#123; <span class="attr">n</span>: <span class="number">2</span> &#125;</div><div class="line">b = &#123;</div><div class="line">  <span class="attr">n</span>: <span class="number">1</span>,</div><div class="line">  <span class="attr">x</span>: &#123;</div><div class="line">    <span class="attr">n</span>: <span class="number">2</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>再看一例子说明一下:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span> (<span class="params">x</span>) </span>&#123;</div><div class="line">  x = &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f2</span> (<span class="params">x</span>) </span>&#123;</div><div class="line">  x.a = <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> o1 = &#123;&#125;, o2 = &#123;&#125;;</div><div class="line">f1(o1);</div><div class="line">f2(o2);</div><div class="line"><span class="comment">// 执行完后o1 = &#123;&#125;, o2 = &#123; a: 1 &#125;</span></div></pre></td></tr></table></figure></p>
 <p>可以理解为函数调用过程let tmp = 实参，然后对tmp进行计算</p>
-<h4 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h4><p>关于函子Functor:<br>famp: (a-&gt;) -&gt; [a] -&gt; [b]<br>famp参数(a-&gt;)函数映射,[a]函子值，返回[b]函子值<br>简单讲就是函数可以作用域函子值上，结果就是该函数在函子上的映射结果<br>关于函数式不是太理解，可能以后会学习Haskell加深理解</p>
+<h4 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h4><p>关于函子Functor:<br>famp: (a-&gt;b) -&gt; [a] -&gt; [b]<br>famp参数(a-&gt;b)函数映射,[a]函子值，返回[b]函子值<br>简单讲就是函数可以作用域函子值上，结果就是该函数在函子上的映射结果<br>关于函数式不是太理解，可能以后会学习Haskell加深理解</p>
 <ol>
 <li>[推荐]参见js函数式编程指南<a href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/" target="_blank" rel="external">在线阅读</a> </li>
 <li><a href="http://www.jdon.com/idea/functor-monad.html" target="_blank" rel="external">函数式编程中Functor和Monad的形象解释</a></li>
 <li><a href="http://jiyinyiyong.github.io/monads-in-pictures/" target="_blank" rel="external">Functor, Applicative以及Monad的图片阐释</a></li>
 </ol>
 <h4 id="关于void"><a href="#关于void" class="headerlink" title="关于void"></a>关于void</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> expression === <span class="literal">undefined</span>;  <span class="comment">// true</span></div></pre></td></tr></table></figure>
-<p>注意expression必须是一个整体，要括起来，和<code>undefined</code>的区别是会计算expression，若你看到有的人代码写void(0)也好,void 0也好,void 666也好,不要惊讶，因为它和<code>undefined</code>等价！</p>
+<p>注意expression必须是一个整体，要括起来，和<code>undefined</code>的区别是会计算expression，若你看到有的人代码写<code>void(0)</code>也好,<code>void 0</code>也好,<code>void 666</code>也好,不要惊讶，因为它和<code>undefined</code>等价！</p>
 <blockquote>
-<p>注意:在ES5之前,undefined可以被改写!不过好在ES6之后,undefined只可读，但是局部变量依然可以对之改写！<br>所以说用void 0来赋值<code>undefined</code>是一个好习惯！</p>
+<p>注意:在ES5之前,undefined可以被改写!不过好在ES6之后,undefined只可读，但是局部变量依然可以对之改写！<br>所以说用<code>void 0</code>来赋值<code>undefined</code>是一个好习惯！</p>
 </blockquote>
 <h4 id="关于const的问题"><a href="#关于const的问题" class="headerlink" title="关于const的问题"></a>关于const的问题</h4><p>问题:const修饰的变量可以改吗？<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> a = <span class="number">12</span>;</div><div class="line">a = <span class="number">0</span>;        <span class="comment">// assigment to constant variable</span></div><div class="line"></div><div class="line"><span class="keyword">const</span> b = &#123;&#125;;</div><div class="line">b.p = <span class="number">1</span>;      <span class="comment">// that's ok</span></div></pre></td></tr></table></figure></p>
 <p>const修饰的变量指向地址不可变，但是里面存储的值是可以变动的！<br>值得注意的是const修饰的变量需要初始化.</p>
