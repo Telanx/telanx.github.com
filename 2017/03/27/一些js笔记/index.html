@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="js," />
 
 
 
@@ -87,15 +87,21 @@
 
 
 
-<meta name="description" content="Where there is a will, there is a way!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Telanx">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="本文主要内容是笔者学js以来记录的一些问题以及一些使用技巧。大部分都可以在网路上找到，因为时过久远，不保证所有链接都有效.
+生成包含n个元素的数组123456let generateArray = n =&amp;gt; Array(n + 1);                        // 这种网上看到的，比较多了，缺点是不可用map遍历,若非要遍历可以Array(n + 1).join(c).">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一些js笔记">
+<meta property="og:url" content="http://yoursite.com/2017/03/27/一些js笔记/index.html">
 <meta property="og:site_name" content="Telanx">
-<meta property="og:description" content="Where there is a will, there is a way!">
+<meta property="og:description" content="本文主要内容是笔者学js以来记录的一些问题以及一些使用技巧。大部分都可以在网路上找到，因为时过久远，不保证所有链接都有效.
+生成包含n个元素的数组123456let generateArray = n =&amp;gt; Array(n + 1);                        // 这种网上看到的，比较多了，缺点是不可用map遍历,若非要遍历可以Array(n + 1).join(c).">
+<meta property="og:image" content="http://yoursite.com/../images/figure1.gif">
+<meta property="og:updated_time" content="2017-03-27T05:41:26.966Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Telanx">
-<meta name="twitter:description" content="Where there is a will, there is a way!">
+<meta name="twitter:title" content="一些js笔记">
+<meta name="twitter:description" content="本文主要内容是笔者学js以来记录的一些问题以及一些使用技巧。大部分都可以在网路上找到，因为时过久远，不保证所有链接都有效.
+生成包含n个元素的数组123456let generateArray = n =&amp;gt; Array(n + 1);                        // 这种网上看到的，比较多了，缺点是不可用map遍历,若非要遍历可以Array(n + 1).join(c).">
+<meta name="twitter:image" content="http://yoursite.com/../images/figure1.gif">
 
 
 
@@ -123,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/27/一些js笔记/"/>
 
 
 
 
 
-  <title> Telanx </title>
+  <title> 一些js笔记 | Telanx </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -154,9 +160,7 @@
     
   
 
-  <div class="container sidebar-position-right 
-   page-home 
- ">
+  <div class="container sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -253,9 +257,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -285,10 +289,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2017/03/27/一些js笔记/" itemprop="url">
-                  一些js笔记
-                </a>
+                一些js笔记
               
             
           </h1>
@@ -339,9 +340,7 @@
       
 
       
-        
-          
-            <p>本文主要内容是笔者学js以来记录的一些问题以及一些使用技巧。大部分都可以在网路上找到，因为时过久远，不保证所有链接都有效.</p>
+        <p>本文主要内容是笔者学js以来记录的一些问题以及一些使用技巧。大部分都可以在网路上找到，因为时过久远，不保证所有链接都有效.</p>
 <h6 id="生成包含n个元素的数组"><a href="#生成包含n个元素的数组" class="headerlink" title="生成包含n个元素的数组"></a>生成包含n个元素的数组</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> generateArray = <span class="function"><span class="params">n</span> =&gt;</span> <span class="built_in">Array</span>(n + <span class="number">1</span>);                        <span class="comment">// 这种网上看到的，比较多了，缺点是不可用map遍历,若非要遍历可以Array(n + 1).join(c).split(c)</span></div><div class="line"><span class="keyword">let</span> generateArray2 = <span class="function"><span class="params">n</span> =&gt;</span> <span class="built_in">Array</span>.apply(<span class="literal">null</span>, &#123; <span class="attr">length</span>: n &#125;);   <span class="comment">// 这种是在Vuejs里看到的，比较实用</span></div><div class="line"><span class="comment">// 应用：字符串复制</span></div><div class="line"><span class="keyword">let</span> coyStr = <span class="function">(<span class="params">str, n</span>) =&gt;</span> <span class="built_in">Array</span>(n + <span class="number">1</span>).join(str);</div><div class="line"><span class="comment">// 应用: 生成类似range数列</span></div><div class="line"><span class="keyword">let</span> range = <span class="function">(<span class="params">start, end</span>) =&gt;</span> <span class="built_in">Array</span>.apply(<span class="literal">null</span>, &#123; <span class="attr">length</span>: end - start + <span class="number">1</span>&#125;).map(<span class="function"><span class="params">()</span> =&gt;</span> start++);</div></pre></td></tr></table></figure>
 <h6 id="ES6-let变量暂时性死区域DTZ"><a href="#ES6-let变量暂时性死区域DTZ" class="headerlink" title="ES6 let变量暂时性死区域DTZ"></a>ES6 let变量暂时性死区域DTZ</h6><p>参见阮一峰的<a href="http://es6.ruanyifeng.com/" target="_blank" rel="external">ES6教程</a></p>
 <blockquote>
@@ -391,163 +390,72 @@
 <li><a href="http://www.yinwang.org/blog-cn/2013/04/14/yoda-notation" target="_blank" rel="external">王垠 Yoda表示法错在哪里</a><h6 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 取整</span></div><div class="line"><span class="built_in">parseInt</span>(a, <span class="number">10</span>);</div><div class="line"><span class="built_in">Math</span>.floor(a);</div><div class="line">a &gt;&gt; <span class="number">0</span>;</div><div class="line">~~a;</div><div class="line">a|<span class="number">0</span></div><div class="line"></div><div class="line"><span class="comment">// undefined，数组或对象访问都比较慢，慎用！</span></div><div class="line"><span class="literal">undefined</span> === <span class="keyword">void</span> <span class="number">0</span> === <span class="number">0</span>[<span class="number">0</span>] === (&#123;&#125;).a;</div><div class="line"><span class="comment">// Infinity</span></div><div class="line"><span class="literal">Infinity</span> === <span class="number">1</span>/<span class="number">0</span>;</div><div class="line"><span class="comment">// 布尔值转化</span></div><div class="line"><span class="literal">true</span> === !<span class="number">0</span> === !!(<span class="string">'1'</span> == <span class="number">1</span>)</div></pre></td></tr></table></figure></li>
 </ol>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <div>
+      
+        
+
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/24/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Telanx">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Telanx">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/24/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-24T16:27:50+08:00">
-                2017-03-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/js/" rel="tag"># js</a>
           
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
         
-          
-            <p>This is the default “Hello World” page.<br>自豪地使用<a href="https://hexo.io" target="_blank" rel="external">Hexo</a> Theme with Mist@NextT  </p>
-<h4 id="Markdown-Test"><a href="#Markdown-Test" class="headerlink" title="Markdown Test"></a>Markdown Test</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line"><span class="section">title: Hello World</span></div><div class="line">---</div><div class="line">This is the default "Hello World" page.</div><div class="line">自豪地使用[<span class="string">Hexo</span>](<span class="link">https://hexo.io</span>) Theme with Mist@NextT</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/24/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -555,6 +463,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -574,8 +486,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -628,6 +549,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#生成包含n个元素的数组"><span class="nav-number">1.</span> <span class="nav-text">生成包含n个元素的数组</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#ES6-let变量暂时性死区域DTZ"><span class="nav-number">2.</span> <span class="nav-text">ES6 let变量暂时性死区域DTZ</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#引用传值问题"><span class="nav-number">3.</span> <span class="nav-text">引用传值问题</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#函数式编程"><span class="nav-number">4.</span> <span class="nav-text">函数式编程</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#关于void"><span class="nav-number">5.</span> <span class="nav-text">关于void</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#箭头函数的一个作用"><span class="nav-number">6.</span> <span class="nav-text">箭头函数的一个作用</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Object的一个问题"><span class="nav-number">7.</span> <span class="nav-text">Object的一个问题</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#关于原型链"><span class="nav-number">8.</span> <span class="nav-text">关于原型链</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#ES5里的caller和callee"><span class="nav-number">9.</span> <span class="nav-text">ES5里的caller和callee</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Yoda尤达表达式"><span class="nav-number">10.</span> <span class="nav-text">Yoda尤达表达式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#其它"><span class="nav-number">11.</span> <span class="nav-text">其它</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -728,6 +665,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 
