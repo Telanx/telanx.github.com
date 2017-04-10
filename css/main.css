@@ -306,7 +306,8 @@ hr {
 blockquote {
   padding: 0 15px;
   color: #666;
-  border-left: 4px solid #ddd;
+  border-left: 4px solid #fc6423;
+  background: #fdfaf1;
 }
 blockquote cite::before {
   content: "-";
@@ -999,8 +1000,7 @@ pre .javascript .function {
   font-size: 20px;
   font-weight: normal;
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
-  color: #08a;
-  text-shadow: 2px 2px 5px #000;
+  color: #555;
   font-size: 2em;
 }
 .site-subtitle {
@@ -1620,6 +1620,16 @@ pre .javascript .function {
     display: none;
   }
 }
+.sidebar-toggle-music {
+  bottom: 75px;
+}
+.icon-music:before {
+  position: absolute;
+  margin-top: 5px;
+  content: '♬';
+  text-align: center;
+  color: #fff;
+}
 .sidebar-toggle-line {
   position: relative;
   display: inline-block;
@@ -1720,7 +1730,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff32ff;
+  background: #8b0d45;
 }
 .links-of-blogroll {
   font-size: 13px;
