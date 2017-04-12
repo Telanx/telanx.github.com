@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="scheme," />
 
 
 
@@ -87,15 +87,27 @@
 
 
 
-<meta name="description" content="Where there is a will, there is a way!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Telanx">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="学习scheme是为了学习了解函数式编程，目前看的是入门教材计算机程序的构造和解释(SICP)。
+求值顺序1(define (square x) (* x x))
+求值(square (+ 2 3))可能有2种求值方式:
+1 正则序求值:先展开而后规约123=&amp;gt; (* (+ 2 3) (+ 2 3))=&amp;gt; (+ (* 2 2) (* 2 3) (* 2 3) (* 3 3))=&amp;gt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="scheme学习笔记">
+<meta property="og:url" content="http://yoursite.com/2017/04/12/scheme学习笔记/index.html">
 <meta property="og:site_name" content="Telanx">
-<meta property="og:description" content="Where there is a will, there is a way!">
+<meta property="og:description" content="学习scheme是为了学习了解函数式编程，目前看的是入门教材计算机程序的构造和解释(SICP)。
+求值顺序1(define (square x) (* x x))
+求值(square (+ 2 3))可能有2种求值方式:
+1 正则序求值:先展开而后规约123=&amp;gt; (* (+ 2 3) (+ 2 3))=&amp;gt; (+ (* 2 2) (* 2 3) (* 2 3) (* 3 3))=&amp;gt;">
+<meta property="og:image" content="http://yoursite.com/images/sqrt.png">
+<meta property="og:updated_time" content="2017-04-12T04:47:21.486Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Telanx">
-<meta name="twitter:description" content="Where there is a will, there is a way!">
+<meta name="twitter:title" content="scheme学习笔记">
+<meta name="twitter:description" content="学习scheme是为了学习了解函数式编程，目前看的是入门教材计算机程序的构造和解释(SICP)。
+求值顺序1(define (square x) (* x x))
+求值(square (+ 2 3))可能有2种求值方式:
+1 正则序求值:先展开而后规约123=&amp;gt; (* (+ 2 3) (+ 2 3))=&amp;gt; (+ (* 2 2) (* 2 3) (* 2 3) (* 3 3))=&amp;gt;">
+<meta name="twitter:image" content="http://yoursite.com/images/sqrt.png">
 
 
 
@@ -123,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/12/scheme学习笔记/"/>
 
 
 
 
 
-  <title> Telanx </title>
+  <title> scheme学习笔记 | Telanx </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -154,9 +166,7 @@
     
   
 
-  <div class="container sidebar-position-right 
-   page-home 
- ">
+  <div class="container sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -253,9 +263,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -285,10 +295,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2017/04/12/scheme学习笔记/" itemprop="url">
-                  scheme学习笔记
-                </a>
+                scheme学习笔记
               
             
           </h1>
@@ -350,333 +357,84 @@
       
 
       
+        <p>学习scheme是为了学习了解函数式编程，目前看的是入门教材计算机程序的构造和解释(SICP)。</p>
+<h4 id="求值顺序"><a href="#求值顺序" class="headerlink" title="求值顺序"></a>求值顺序</h4><figure class="highlight scheme"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">square</span> x) (<span class="name"><span class="builtin-name">*</span></span> x x))</div></pre></td></tr></table></figure>
+<p>求值<code>(square (+ 2 3))</code>可能有2种求值方式:</p>
+<p>1 <strong>正则序求值</strong>:先展开而后规约<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">=&gt; (* (+ 2 3) (+ 2 3))</div><div class="line">=&gt; (+ (* 2 2) (* 2 3) (* 2 3) (* 3 3))</div><div class="line">=&gt; 25</div></pre></td></tr></table></figure></p>
+<p>2 <strong>应用序求值</strong>:先求值参数而后应用<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">=&gt; (square 5)</div><div class="line">=&gt; (* 5 5)</div><div class="line">=&gt; 25</div></pre></td></tr></table></figure></p>
+<p>可以用下面的方法判断一个解释器采用的是正则序还是应用序的进行求值运算的。<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">;判断scheme(racket)</div><div class="line">&gt;&gt; (define (test x) 1)</div><div class="line">&gt;&gt; (test (/ 1 0))</div><div class="line">=&gt; /: division by zero</div><div class="line">;说明racket是采用应用序求值</div><div class="line"></div><div class="line">// 判断js(V8)</div><div class="line">&gt;&gt; let test = x =&gt; 1;</div><div class="line">&gt;&gt; test(1/0)</div><div class="line">=&gt; 1</div><div class="line">// 说明v8解释采用的是正则序求值</div></pre></td></tr></table></figure></p>
+<h4 id="书上的一些小例子"><a href="#书上的一些小例子" class="headerlink" title="书上的一些小例子"></a>书上的一些小例子</h4><ol>
+<li>牛顿法求平方根<br>求x的平方根y，假设一个y，然后求y和x/y的平均值以获得更好的逼近.<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">#lang racket</div><div class="line">;计算平均值</div><div class="line">(define (avg x y)</div><div class="line">  (/ (+ x y) 2))</div><div class="line"></div><div class="line">;绝对值</div><div class="line">(define (abs x)</div><div class="line">  (if (&lt; x 0) (- x) x))</div><div class="line"></div><div class="line">;平方</div><div class="line">(define (square x) (* x x))</div><div class="line"></div><div class="line">;逼近检测,绝对误差不超过0.0001即可</div><div class="line">(define (good-enough x y)</div><div class="line">  (if (&lt; (abs (- (square x) y)) 0.0001) true</div><div class="line">    false))</div><div class="line"></div><div class="line">;迭代平方根</div><div class="line">(define (sqrt-iter x s)</div><div class="line">  (if (good-enough (avg s (/ x s)) x)</div><div class="line">    (avg s (/ x s))</div><div class="line">    (sqrt-iter x (avg s (/ x s)))</div><div class="line">  ))</div><div class="line"></div><div class="line">;求平方根</div><div class="line">(define (sqrt x)</div><div class="line">  (sqrt-iter x 1.0))</div><div class="line">  </div><div class="line">;test cases</div><div class="line">(sqrt 2)</div><div class="line">(sqrt 4)</div><div class="line">(sqrt 7)</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>测试结果如下:<br><img src="/images/sqrt.png" alt="sqrt"></p>
+
+      
+    </div>
+
+    <div>
+      
         
-          
-          学习scheme是为了学习了解函数式编程，目前看的是入门教材计算机程序的构造和解释(SICP)。
-求值顺序1(define (square x) (* x x))
-求值(square (+ 2 3))可能有2种求值方式:
-1 正则序求值:先展开而后规约123=&gt; (* (+ 2 3) (+ 2
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/04/12/scheme学习笔记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
-      
-    </div>
-
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/27/一些js笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Telanx">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Telanx">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/27/一些js笔记/" itemprop="url">
-                  一些js笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-27T10:18:52+08:00">
-                2017-03-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/scheme/" rel="tag"># scheme</a>
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/03/27/一些js笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/03/27/一些js笔记/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
         
-          
-          本文主要内容是笔者学js以来记录的一些问题以及一些使用技巧。大部分都可以在网路上找到，因为时过久远，不保证所有链接都有效.
-生成包含n个元素的数组123456let generateArray = n =&gt; Array(n + 1);                        // 这种网
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/03/27/一些js笔记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/27/一些js笔记/" rel="next" title="一些js笔记">
+                <i class="fa fa-chevron-left"></i> 一些js笔记
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
 
-    <div>
-      
-    </div>
+          <span class="post-nav-divider"></span>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/24/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Telanx">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Telanx">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+          <div class="post-nav-prev post-nav-item">
             
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/24/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-24T16:27:50+08:00">
-                2017-03-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/03/24/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/03/24/hello-world/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-          This is the default “Hello World” page.自豪地使用Hexo Theme with Mist@NextT  
-Markdown Test12345---title: Hello World---This is the default "Hello World" p
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/03/24/hello-world/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -684,6 +442,17 @@ Markdown Test12345---title: Hello World---This is the default "Hello World" p
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -702,8 +471,17 @@ Markdown Test12345---title: Hello World---This is the default "Hello World" p
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -756,6 +534,22 @@ Markdown Test12345---title: Hello World---This is the default "Hello World" p
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#求值顺序"><span class="nav-number">1.</span> <span class="nav-text">求值顺序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#书上的一些小例子"><span class="nav-number">2.</span> <span class="nav-text">书上的一些小例子</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -856,6 +650,10 @@ Markdown Test12345---title: Hello World---This is the default "Hello World" p
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 
@@ -873,6 +671,18 @@ Markdown Test12345---title: Hello World---This is the default "Hello World" p
       <script id="dsq-count-scr" src="https://telanx.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/04/12/scheme学习笔记/';
+          this.page.identifier = '2017/04/12/scheme学习笔记/';
+          this.page.title = 'scheme学习笔记';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://telanx.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   

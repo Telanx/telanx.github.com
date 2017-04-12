@@ -96,7 +96,7 @@
 <meta property="og:description" content="本文主要内容是笔者学js以来记录的一些问题以及一些使用技巧。大部分都可以在网路上找到，因为时过久远，不保证所有链接都有效.
 生成包含n个元素的数组123456let generateArray = n =&amp;gt; Array(n + 1);                        // 这种网上看到的，比较多了，缺点是不可用map遍历,若非要遍历可以Array(n + 1).join(c).">
 <meta property="og:image" content="http://yoursite.com/images/figure1.gif">
-<meta property="og:updated_time" content="2017-04-10T07:37:19.800Z">
+<meta property="og:updated_time" content="2017-04-10T08:08:34.066Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一些js笔记">
 <meta name="twitter:description" content="本文主要内容是笔者学js以来记录的一些问题以及一些使用技巧。大部分都可以在网路上找到，因为时过久远，不保证所有链接都有效.
@@ -406,6 +406,8 @@
 </ol>
 <h4 id="对象深拷贝"><a href="#对象深拷贝" class="headerlink" title="对象深拷贝"></a>对象深拷贝</h4><p>常规的做法就是递归遍历每个属性，然后对每个属性进行拷贝。以前我以为只要Array、Function、Object、基本值类型这几类拷贝就行了，然而还是too young too naive!<br>包括jquery和lodash(undersocre)在内的一些库对于深拷贝的实现都有很多行代码。如jquery的有六十来行(当然jQuery也没有处理好循环引用的问题),而lodash有上百行,可见水不浅！<br>当然如果<font color="#f00">对象里只包含Number, String, Boolean, Array, null等扁平对象，即那些能够被 json 直接表示的数据结构</font>，则可以使用<code>JSON.parse(JSON.stringify(obj))</code>来进行深拷贝<br>参考链接:<a href="http://jerryzou.com/posts/dive-into-deep-clone-in-javascript/" target="_blank" rel="external">深入剖析 JavaScript的深拷贝</a></p>
 <h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 取整</span></div><div class="line"><span class="built_in">parseInt</span>(a, <span class="number">10</span>);</div><div class="line"><span class="built_in">Math</span>.floor(a);</div><div class="line">a &gt;&gt; <span class="number">0</span>;</div><div class="line">~~a;</div><div class="line">a|<span class="number">0</span></div><div class="line"></div><div class="line"><span class="comment">// undefined，数组或对象访问都比较慢，慎用！</span></div><div class="line"><span class="literal">undefined</span> === <span class="keyword">void</span> <span class="number">0</span> === <span class="number">0</span>[<span class="number">0</span>] === (&#123;&#125;).a;</div><div class="line"><span class="comment">// Infinity</span></div><div class="line"><span class="literal">Infinity</span> === <span class="number">1</span>/<span class="number">0</span>;</div><div class="line"><span class="comment">// 布尔值转化</span></div><div class="line"><span class="literal">true</span> === !<span class="number">0</span> === !!(<span class="string">'1'</span> == <span class="number">1</span>)</div></pre></td></tr></table></figure>
+<p>/<strong> 后面加上的 </strong>/<br>其他相关参考文章<br><a href="http://www.qcyoung.com/2015/08/25/%E7%94%B1%E4%B8%80%E6%AC%A1%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8E%A7%E4%BB%B6%E9%87%8D%E7%BB%98%E9%97%AE%E9%A2%98%E8%AF%A6%E8%B0%88%E6%B5%8F%E8%A7%88%E5%99%A8%E9%87%8D%E6%8E%92%E3%80%81%E9%87%8D%E7%BB%98%E6%9C%BA%E5%88%B6/" target="_blank" rel="external">浏览器控件重绘问题概述浏览器重排、重绘、渲染机制</a><br>要点：因为浏览器优化，会将某些操作合并到一起，如果属于不同操作都可能触发浏览器重回，所以尽量把同类型操作写一起！</p>
+
       
     </div>
 
@@ -456,6 +458,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/12/scheme学习笔记/" rel="prev" title="scheme学习笔记">
+                scheme学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -533,7 +539,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -546,7 +552,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
