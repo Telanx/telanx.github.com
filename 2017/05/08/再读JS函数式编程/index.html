@@ -1,0 +1,723 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="JS函数式编程指南在线阅读https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch1.html
+之前看这篇教程时，半懂不懂，尤其是后面第7章Haskell的签名类型，第8、10章Functor，各种Applicative Functors、第9章Monad，以至于后面没有继续阅读下去。于是乎学习了下Scheme以及">
+<meta property="og:type" content="article">
+<meta property="og:title" content="再读JS函数式编程指南">
+<meta property="og:url" content="http://yoursite.com/2017/05/08/再读JS函数式编程/index.html">
+<meta property="og:site_name" content="Telanx">
+<meta property="og:description" content="JS函数式编程指南在线阅读https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch1.html
+之前看这篇教程时，半懂不懂，尤其是后面第7章Haskell的签名类型，第8、10章Functor，各种Applicative Functors、第9章Monad，以至于后面没有继续阅读下去。于是乎学习了下Scheme以及">
+<meta property="og:updated_time" content="2017-05-08T08:37:48.416Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="再读JS函数式编程指南">
+<meta name="twitter:description" content="JS函数式编程指南在线阅读https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch1.html
+之前看这篇教程时，半懂不懂，尤其是后面第7章Haskell的签名类型，第8、10章Functor，各种Applicative Functors、第9章Monad，以至于后面没有继续阅读下去。于是乎学习了下Scheme以及">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/08/再读JS函数式编程/"/>
+
+
+
+
+
+  <title> 再读JS函数式编程指南 | Telanx </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a link="/"  class="brand" rel="start">
+        <!--<span class="logo-line-before"><i></i></span>-->
+        <span class="site-title">Telanx</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              
+                <i class="menu-item-icon fa fa-fw fa-home"></i>
+               
+              <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              
+                <i class="menu-item-icon fa fa-fw fa-archive"></i>
+               
+              <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              
+                <i class="menu-item-icon fa fa-fw fa-user"></i>
+               
+              <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+      <li class="menu-item menu-item-zard">
+        <a href="/zard" rel="section">
+          ZARD
+        </a>
+      </li>
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/08/再读JS函数式编程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Telanx">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Telanx">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                再读JS函数式编程指南
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-08T09:52:15+08:00">
+                2017-05-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/08/再读JS函数式编程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/08/再读JS函数式编程/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>JS函数式编程指南在线阅读<a href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch1.html" target="_blank" rel="external">https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch1.html</a></p>
+<p>之前看这篇教程时，半懂不懂，尤其是后面第7章Haskell的签名类型，第8、10章Functor，各种Applicative Functors、第9章Monad，以至于后面没有继续阅读下去。于是乎学习了下Scheme以及看了下<a href="https://learnyoua.haskell.sg/content/zh-cn/ch01/introduction.html" target="_blank" rel="external">Haskell趣学指南</a>，有些概念也就不再那么陌生，于是重新拾起本教程，记录下一些自己觉得有用的知识。如果你在学习过程中遇到和我一样的问题，即便是看网上关于Monad，Applicative图解还是不太明白时，强烈建议你看一下Haskell里关于<code>Functor</code>、<code>Applicative</code>、<code>Monad</code>定义的一些法则(law)以及对应的常见的实例(instance)。</p>
+<h3 id="几个经典数学定律"><a href="#几个经典数学定律" class="headerlink" title="几个经典数学定律"></a>几个经典数学定律</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 结合律(assosiative)</span></div><div class="line">add(add(x, y), z) ==  add(x, add(y, z))</div><div class="line"><span class="comment">// 交换律(commutative)</span></div><div class="line">add(x, y) == add(y, x)</div><div class="line"><span class="comment">// 同一律</span></div><div class="line">add(x, <span class="number">0</span>) == x</div><div class="line"><span class="comment">// 分配律(distributive)</span></div><div class="line">multiply(x, add(y, z)) == add(multiply(x, y), multiply(x, z))</div></pre></td></tr></table></figure>
+<p>这几个经典数学定律是第一章列举的一个小例子提到的，有趣的是这几个定律在Haskell里关于<code>Functor</code>、<code>Applicative Functor</code>、<code>Monad</code>的法则里反复出现，可能背后涉及的范畴论里关于这几个概念的定义确实如此。</p>
+<h3 id="pointfree风格"><a href="#pointfree风格" class="headerlink" title="pointfree风格"></a>pointfree风格</h3><p>第二章列举了一段垃圾代码,参看上一篇文章<a href="./由一段垃圾代码想到的λ演算应用">由一段垃圾代码想到的λ演算应用</a>。类似<code>f(x) = g(x)</code>写成pointfree风格就是<code>f = g</code>,这样写的好处是节省代码量、参数不固定，增加可维护、可扩展性，缺点可阅读性稍差。</p>
+<h3 id="纯函数及其作用"><a href="#纯函数及其作用" class="headerlink" title="纯函数及其作用"></a>纯函数及其作用</h3><p>第三章提到了关于纯函数的概念。没有副作用的函数称为<strong>纯函数</strong>(相当于<strong>引用透明</strong>，即一代代吗可以替换成它执行的结果，而且是在不改变整个程序的行为前提下替换的)。所谓没有副作用指输出只与输入有关，而且没有任何可观察的副作用。注意很多书上可能不会明确指明后一点。<br>本章中提到一个关于保留纯粹性而不受外部环境影响的一个办法:使用<code>Object.freeze</code>来冻结变量。当然在ES6中已经可以使用<code>const</code>来定义那些不可变变量。<br>纯函数的作用:<br><strong>1.可缓存性(Cacheable)</strong><br>由于输出只与输入有关，因此可以把结果缓存起来加速计算。在设计模式里对应的是单例模式。例如:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> memoize = <span class="function"><span class="keyword">function</span> (<span class="params">f</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> cache = &#123;&#125;;</div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> arg_str = <span class="built_in">JSON</span>.stringify(<span class="built_in">arguments</span>);                  <span class="comment">// 可能有函数作为参数等</span></div><div class="line">    <span class="comment">// 如果cache[arg_str]是包含!!x返回false之类的，比如0,false,undefined等，将会重复计算</span></div><div class="line">    cache[arg_str] = cache[arg_str] || f.apply(f, <span class="built_in">arguments</span>);</div><div class="line">    <span class="keyword">return</span> cache[arg_str];</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">squareNum = memoize(<span class="function"><span class="params">x</span> =&gt;</span> x*x);</div><div class="line">squareNum(<span class="number">2</span>); <span class="comment">// 第一次执行完毕后会缓存一份在cache中</span></div><div class="line">squareNum(<span class="number">2</span>); <span class="comment">// 第二次执行会优先从cache中提取</span></div></pre></td></tr></table></figure></p>
+<p><strong>2.可移植性/自动文档化(Portable/Self-Documenting)</strong><br>黑人问号??<br><strong>3.可测试性(Testable)</strong><br>还是根据纯函数的特性，输出只与输入有关，因此只需要给一个输入，断言一个输出即可。<br><strong>4.合理性</strong><br>讲的就是纯函数的引用透明性(referential transparency)带来的好处以及如何利用<code>等式推导(equational reasoning)</code>来分析代码。这让我联想到前几天看到的Facebook的最新开源工具Prepack，基本上就是这种等式推导思想，在编译过程中执行原本需要在运行时计算的过程，并重写js代码来提高运行效率。<br><strong>并行性</strong><br>纯函数不需要访问共享内存，不会有副作用而进入竞争态(race condition)。并行代码在服务端 js 环境以及使用了 web worker 的浏览器那里是非常容易实现的，因为它们使用了线程（thread）。不过出于对非纯函数复杂度的考虑，当前主流观点还是避免使用这种并行。(黑人问号??)</p>
+<h3 id="柯里化curry和函数组合compose"><a href="#柯里化curry和函数组合compose" class="headerlink" title="柯里化curry和函数组合compose"></a>柯里化curry和函数组合compose</h3><p><strong>柯里化</strong><br>λ演算里是不支持“多个参数”的，如果要支持多参数，可以采用分部调用如<code>λx.λy.(f x y)</code>。在Haskell里参数都是<em>自动柯里化</em>的，例如:<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt;&gt; (/) <span class="number">2</span> <span class="number">3</span></div><div class="line"><span class="comment">-- 等价于 (2 /) 3 --</span></div><div class="line"><span class="comment">-- 等价于 (2 / 3) --</span></div><div class="line"></div><div class="line"><span class="comment">-- 查看(/)类型可以知道(/)函数接受2个参数返回一个值，实际执行时会分部单参数调用执行 --</span></div><div class="line">&gt;&gt; :t (/)</div><div class="line">(/) :: <span class="type">Fractional</span> a =&gt; a -&gt; a -&gt; a</div></pre></td></tr></table></figure></p>
+<p>配合使用loadash的curry实现柯里化，将要操作的数据放在最后一个参数。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> curry = <span class="built_in">require</span>(<span class="string">'loadash'</span>).curry;</div><div class="line"><span class="keyword">var</span> match = curry(<span class="function"><span class="keyword">function</span> (<span class="params">what, str</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> str.match(what);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">match(<span class="regexp">/\d+/</span>, <span class="string">"abcd123"</span>) == match(<span class="regexp">/\d+/</span>)(<span class="string">"abcd123"</span>)</div></pre></td></tr></table></figure></p>
+<p>柯里化所做的工作就是输入一个参数返回一个新函数来处理剩余参数，通过简单传递几个参数便能动态创建实用的新函数。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> _ = <span class="built_in">require</span>(<span class="string">'loadash'</span>);</div><div class="line"><span class="comment">// 包裹数组的slice函数使之成为curry函数</span></div><div class="line"><span class="keyword">var</span> slice = _.curry(<span class="function"><span class="keyword">function</span> (<span class="params">a, b, list</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> list.slice(a,b);</div><div class="line">&#125;);</div><div class="line"><span class="comment">// 借助slice定义一个`take` curry函数，使的获取list的前n个字符</span></div><div class="line"><span class="keyword">var</span> take = slice(<span class="number">0</span>);</div></pre></td></tr></table></figure></p>
+<p><strong>函数组合</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> compose = <span class="function">(<span class="params">f, g</span>) =&gt;</span> x =&gt; f(g(x))</div><div class="line"><span class="comment">// 在Haskell提供了一个函数组合的语法糖“.”,等同于(f.g)</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> add1 = <span class="function"><span class="params">x</span> =&gt;</span> x+<span class="number">1</span>;</div><div class="line"><span class="keyword">var</span> div2 = <span class="function"><span class="params">x</span> =&gt;</span> x/<span class="number">2</span>;</div><div class="line">compose(div2, add1)(<span class="number">3</span>) = <span class="number">2</span></div><div class="line"><span class="comment">// 等价Haskell代码`((/2).(+1)) 3`</span></div></pre></td></tr></table></figure></p>
+<p>组合的一个重要特性:结合律。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compose(f, compose(g, h)) == compose(compose(f, g), h)</div></pre></td></tr></table></figure></p>
+<p>这使得我们可以任意将一个函数分组拆分开来，然后像搭积木形式组合在一块</p>
+<h3 id="Hindley-Milner类型签名"><a href="#Hindley-Milner类型签名" class="headerlink" title="Hindley-Milner类型签名"></a>Hindley-Milner类型签名</h3><p>在Haskell里用于编译时检测(compile time checks),当然类型是可以推断的，所以类型签名也不是必须的。另一方面，通过类型签名暴露函数的行为和目的，方便代码阅读。<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--函数名 :: 接口类型 =&gt; 参数... =&gt; 输出</span></div><div class="line">(add) :: <span class="type">Num</span> a =&gt; a -&gt; a -&gt; a</div><div class="line"><span class="title">add</span> a b = (+) a b</div><div class="line"><span class="comment">--说明函数(+)接收2个Num类型参数，结果返回Num类型值</span></div></pre></td></tr></table></figure></p>
+<h3 id="Functor"><a href="#Functor" class="headerlink" title="Functor"></a>Functor</h3><p>本章只说明了几个Functor实例的js实现，但是为什么要这这样实现呢?下面结合Haskell里关于Functor定义加以说明。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/20/由一段代码想到的λ演算应用/" rel="next" title="由一段垃圾代码想到的λ演算应用">
+                <i class="fa fa-chevron-left"></i> 由一段垃圾代码想到的λ演算应用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Telanx" />
+          <p class="site-author-name" itemprop="name">Telanx</p>
+           
+              <p class="site-description motion-element" itemprop="description">Where there is a will, there is a way!</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#几个经典数学定律"><span class="nav-number">1.</span> <span class="nav-text">几个经典数学定律</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pointfree风格"><span class="nav-number">2.</span> <span class="nav-text">pointfree风格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#纯函数及其作用"><span class="nav-number">3.</span> <span class="nav-text">纯函数及其作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#柯里化curry和函数组合compose"><span class="nav-number">4.</span> <span class="nav-text">柯里化curry和函数组合compose</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hindley-Milner类型签名"><span class="nav-number">5.</span> <span class="nav-text">Hindley-Milner类型签名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Functor"><span class="nav-number">6.</span> <span class="nav-text">Functor</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Telanx</span>
+</div>
+
+
+<div class="powered-by">
+  由Hexo & Mist@NextT 强力驱动
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://telanx.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/08/再读JS函数式编程/';
+          this.page.identifier = '2017/05/08/再读JS函数式编程/';
+          this.page.title = '再读JS函数式编程指南';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://telanx.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

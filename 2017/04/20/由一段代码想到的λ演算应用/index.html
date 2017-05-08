@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="Telanx">
 <meta property="og:description" content="很久前看javascript函数式编程时，作者提到一段垃圾代码:12345var f = function (f1) &amp;#123;  return f2(function (x) &amp;#123;     return f1(x);  &amp;#125;);&amp;#125;
 当时看到这段代码时，以为很高级，用到了高阶函数。其实不然，这是一段很经典的垃圾代码，因为经过一步步规约最后结果是f = f2。事实上，初学">
-<meta property="og:updated_time" content="2017-04-20T07:40:39.397Z">
+<meta property="og:updated_time" content="2017-04-20T07:52:09.493Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="由一段垃圾代码想到的λ演算应用">
 <meta name="twitter:description" content="很久前看javascript函数式编程时，作者提到一段垃圾代码:12345var f = function (f1) &amp;#123;  return f2(function (x) &amp;#123;     return f1(x);  &amp;#125;);&amp;#125;
@@ -357,7 +357,7 @@
 <li>函数的作用是左结合的</li>
 <li>λ操作符被绑定到它后面的整个表达式。举例说明一下:<br><code>λf1.f2 (λx.f1 x)</code> 和es6箭头函数的等价形式 <code>f1 =&gt; f2(x =&gt; f1(x))</code><br>对于规则1，如果知道lisp的话，就知道函数调用方式如<code>(func . params)</code>等价于js里的<code>func(...params)</code>也就不难理解了</li>
 </ol>
-<p><strong>b.自由变量和绑定变量</strong><br>如果一个变量x没有在λ表达式中被绑定,比如<code>λy . f x y</code>，x和f是自由的，y被绑定的，在嵌套λ表达式中，相当于每一次层形成一个闭包。</p>
+<p><strong>b.自由变量和绑定变量</strong><br>如果一个变量x没有在λ表达式中被绑定,比如<code>λy . f x y</code>，x和f是自由的，y被绑定的，在嵌套λ表达式中，相当于每一层形成一个闭包,内层自由变量可能被外层绑定而成为绑定变量。</p>
 <p><strong>c.α变换、β规约和η-变换</strong></p>
 <ol>
 <li><strong>α变换</strong> 名称不那么重要，如<code>λx.f x</code> &lt;=&gt; <code>λy.f y</code></li>
@@ -410,6 +410,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/08/再读JS函数式编程/" rel="prev" title="再读JS函数式编程指南">
+                再读JS函数式编程指南 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -478,7 +482,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
