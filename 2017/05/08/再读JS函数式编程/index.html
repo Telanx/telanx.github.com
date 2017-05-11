@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="Telanx">
 <meta property="og:description" content="JS函数式编程指南在线阅读https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch1.html
 之前看这篇教程时，半懂不懂，尤其是后面第7章Haskell的签名类型，第8、10章Functor，各种Applicative Functors、第9章Monad，以至于后面没有继续阅读下去。于是乎学习了下Scheme以及">
-<meta property="og:updated_time" content="2017-05-08T08:37:48.416Z">
+<meta property="og:updated_time" content="2017-05-08T10:09:23.889Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="再读JS函数式编程指南">
 <meta name="twitter:description" content="JS函数式编程指南在线阅读https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch1.html
@@ -363,7 +363,10 @@
 <p>组合的一个重要特性:结合律。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compose(f, compose(g, h)) == compose(compose(f, g), h)</div></pre></td></tr></table></figure></p>
 <p>这使得我们可以任意将一个函数分组拆分开来，然后像搭积木形式组合在一块</p>
 <h3 id="Hindley-Milner类型签名"><a href="#Hindley-Milner类型签名" class="headerlink" title="Hindley-Milner类型签名"></a>Hindley-Milner类型签名</h3><p>在Haskell里用于编译时检测(compile time checks),当然类型是可以推断的，所以类型签名也不是必须的。另一方面，通过类型签名暴露函数的行为和目的，方便代码阅读。<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--函数名 :: 接口类型 =&gt; 参数... =&gt; 输出</span></div><div class="line">(add) :: <span class="type">Num</span> a =&gt; a -&gt; a -&gt; a</div><div class="line"><span class="title">add</span> a b = (+) a b</div><div class="line"><span class="comment">--说明函数(+)接收2个Num类型参数，结果返回Num类型值</span></div></pre></td></tr></table></figure></p>
-<h3 id="Functor"><a href="#Functor" class="headerlink" title="Functor"></a>Functor</h3><p>本章只说明了几个Functor实例的js实现，但是为什么要这这样实现呢?下面结合Haskell里关于Functor定义加以说明。</p>
+<h3 id="Functor"><a href="#Functor" class="headerlink" title="Functor"></a>Functor</h3><p>本章只说明了几个Functor实例的js实现，但是为什么要这这样实现呢?下面结合Haskell里关于Functor定义加以说明。<br><em>1. 什么是Functor?</em></p>
+<p><em>2. Functor’s law</em><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// identity</span></div><div class="line">map(id) = id</div><div class="line"></div><div class="line"><span class="comment">// composition</span></div><div class="line">compose(map(f), map(g)) == map(compose(f, g))</div></pre></td></tr></table></figure></p>
+<h3 id="Applicative-Functor"><a href="#Applicative-Functor" class="headerlink" title="Applicative Functor"></a>Applicative Functor</h3><p>加强版Functor<br>Applicative’s law</p>
+<h3 id="Monad"><a href="#Monad" class="headerlink" title="Monad"></a>Monad</h3><p>加强版Applicative<br>Monad’s law</p>
 
       
     </div>
@@ -534,7 +537,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#几个经典数学定律"><span class="nav-number">1.</span> <span class="nav-text">几个经典数学定律</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pointfree风格"><span class="nav-number">2.</span> <span class="nav-text">pointfree风格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#纯函数及其作用"><span class="nav-number">3.</span> <span class="nav-text">纯函数及其作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#柯里化curry和函数组合compose"><span class="nav-number">4.</span> <span class="nav-text">柯里化curry和函数组合compose</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hindley-Milner类型签名"><span class="nav-number">5.</span> <span class="nav-text">Hindley-Milner类型签名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Functor"><span class="nav-number">6.</span> <span class="nav-text">Functor</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#几个经典数学定律"><span class="nav-number">1.</span> <span class="nav-text">几个经典数学定律</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pointfree风格"><span class="nav-number">2.</span> <span class="nav-text">pointfree风格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#纯函数及其作用"><span class="nav-number">3.</span> <span class="nav-text">纯函数及其作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#柯里化curry和函数组合compose"><span class="nav-number">4.</span> <span class="nav-text">柯里化curry和函数组合compose</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hindley-Milner类型签名"><span class="nav-number">5.</span> <span class="nav-text">Hindley-Milner类型签名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Functor"><span class="nav-number">6.</span> <span class="nav-text">Functor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Applicative-Functor"><span class="nav-number">7.</span> <span class="nav-text">Applicative Functor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monad"><span class="nav-number">8.</span> <span class="nav-text">Monad</span></a></li></ol></div>
             
 
           </div>
