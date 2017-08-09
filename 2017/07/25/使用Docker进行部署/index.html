@@ -87,22 +87,22 @@
 
 
 
-<meta name="description" content="Docker简介Docker的优缺点Docker常用命令1.列举容器、镜像12345# 列举容器docker ps -adocker container ls -a# 列举镜像 docker images -a
-2.删除镜像、容器1234# 删除容器docker rm# 删除镜像docker rmi
-3.启动停止容器1234docker startdocker stop# 创建并启动容器docke">
+<meta name="description" content="Docker安装官方优先推荐通过源安装docker，但实际操作时往往会遇到很多问题，最后通过直接下载安装包进行安装解决的。安装完成后启动docker服务即可。
+Docker常用命令1.列举容器、镜像12345# 列举容器docker ps -adocker container ls -a# 列举镜像 docker images -a
+2.删除镜像、容器1234# 删除容器docker rm# 删除">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Docker进行部署">
 <meta property="og:url" content="http://yoursite.com/2017/07/25/使用Docker进行部署/index.html">
 <meta property="og:site_name" content="Telanx">
-<meta property="og:description" content="Docker简介Docker的优缺点Docker常用命令1.列举容器、镜像12345# 列举容器docker ps -adocker container ls -a# 列举镜像 docker images -a
-2.删除镜像、容器1234# 删除容器docker rm# 删除镜像docker rmi
-3.启动停止容器1234docker startdocker stop# 创建并启动容器docke">
-<meta property="og:updated_time" content="2017-08-03T08:07:11.073Z">
+<meta property="og:description" content="Docker安装官方优先推荐通过源安装docker，但实际操作时往往会遇到很多问题，最后通过直接下载安装包进行安装解决的。安装完成后启动docker服务即可。
+Docker常用命令1.列举容器、镜像12345# 列举容器docker ps -adocker container ls -a# 列举镜像 docker images -a
+2.删除镜像、容器1234# 删除容器docker rm# 删除">
+<meta property="og:updated_time" content="2017-08-03T08:36:25.767Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Docker进行部署">
-<meta name="twitter:description" content="Docker简介Docker的优缺点Docker常用命令1.列举容器、镜像12345# 列举容器docker ps -adocker container ls -a# 列举镜像 docker images -a
-2.删除镜像、容器1234# 删除容器docker rm# 删除镜像docker rmi
-3.启动停止容器1234docker startdocker stop# 创建并启动容器docke">
+<meta name="twitter:description" content="Docker安装官方优先推荐通过源安装docker，但实际操作时往往会遇到很多问题，最后通过直接下载安装包进行安装解决的。安装完成后启动docker服务即可。
+Docker常用命令1.列举容器、镜像12345# 列举容器docker ps -adocker container ls -a# 列举镜像 docker images -a
+2.删除镜像、容器1234# 删除容器docker rm# 删除">
 
 
 
@@ -249,7 +249,6 @@
 </nav>
 
 
-
  </div>
     </header>
 
@@ -336,6 +335,11 @@
           
 
           
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
 
           
 
@@ -352,7 +356,8 @@
       
 
       
-        <h3 id="Docker简介"><a href="#Docker简介" class="headerlink" title="Docker简介"></a>Docker简介</h3><h3 id="Docker的优缺点"><a href="#Docker的优缺点" class="headerlink" title="Docker的优缺点"></a>Docker的优缺点</h3><h3 id="Docker常用命令"><a href="#Docker常用命令" class="headerlink" title="Docker常用命令"></a>Docker常用命令</h3><p>1.列举容器、镜像<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 列举容器</div><div class="line">docker ps -a</div><div class="line">docker container ls -a</div><div class="line"># 列举镜像 </div><div class="line">docker images -a</div></pre></td></tr></table></figure></p>
+        <h3 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h3><p>官方优先推荐通过源安装docker，但实际操作时往往会遇到很多问题，最后通过直接下载安装包进行安装解决的。安装完成后启动docker服务即可。</p>
+<h3 id="Docker常用命令"><a href="#Docker常用命令" class="headerlink" title="Docker常用命令"></a>Docker常用命令</h3><p>1.列举容器、镜像<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 列举容器</div><div class="line">docker ps -a</div><div class="line">docker container ls -a</div><div class="line"># 列举镜像 </div><div class="line">docker images -a</div></pre></td></tr></table></figure></p>
 <p>2.删除镜像、容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># 删除容器</div><div class="line">docker rm</div><div class="line"># 删除镜像</div><div class="line">docker rmi</div></pre></td></tr></table></figure></p>
 <p>3.启动停止容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">docker start</div><div class="line">docker stop</div><div class="line"># 创建并启动容器</div><div class="line">docker run -i -t -v (path) iamge_id pwd</div></pre></td></tr></table></figure></p>
 <p>4.创建容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker create</div></pre></td></tr></table></figure></p>
@@ -519,7 +524,8 @@
           
 
         </nav>
-
+        <!-- 网易云音乐 -->
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=677243&auto=1&height=66"></iframe>
         
 
         <div class="links-of-author motion-element">
@@ -547,7 +553,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker简介"><span class="nav-number">1.</span> <span class="nav-text">Docker简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker的优缺点"><span class="nav-number">2.</span> <span class="nav-text">Docker的优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker常用命令"><span class="nav-number">3.</span> <span class="nav-text">Docker常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用docker-compose进行脚本编排"><span class="nav-number">4.</span> <span class="nav-text">使用docker-compose进行脚本编排</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集群管理"><span class="nav-number">5.</span> <span class="nav-text">集群管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker安装"><span class="nav-number">1.</span> <span class="nav-text">Docker安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker常用命令"><span class="nav-number">2.</span> <span class="nav-text">Docker常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用docker-compose进行脚本编排"><span class="nav-number">3.</span> <span class="nav-text">使用docker-compose进行脚本编排</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集群管理"><span class="nav-number">4.</span> <span class="nav-text">集群管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
             
 
           </div>
@@ -584,6 +590,26 @@
 
 
         
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv">0</span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv">0</span>
+      
+    </span>
+  
+</div>
+
 
         
       </div>

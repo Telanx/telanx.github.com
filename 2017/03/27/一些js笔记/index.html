@@ -96,7 +96,7 @@
 <meta property="og:description" content="本文主要内容是笔者学js以来记录的一些问题以及一些使用技巧。大部分都可以在网路上找到，因为时过久远，不保证所有链接都有效.
 生成包含n个元素的数组123456let generateArray = n =&amp;gt; Array(n + 1);                        // 这种网上看到的，比较多了，缺点是不可用map遍历,若非要遍历可以Array(n + 1).join(c).">
 <meta property="og:image" content="http://yoursite.com/images/figure1.gif">
-<meta property="og:updated_time" content="2017-05-11T01:09:22.370Z">
+<meta property="og:updated_time" content="2017-08-08T01:51:19.081Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一些js笔记">
 <meta name="twitter:description" content="本文主要内容是笔者学js以来记录的一些问题以及一些使用技巧。大部分都可以在网路上找到，因为时过久远，不保证所有链接都有效.
@@ -248,7 +248,6 @@
 </nav>
 
 
-
  </div>
     </header>
 
@@ -335,6 +334,11 @@
           
 
           
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
 
           
 
@@ -359,6 +363,7 @@
 </blockquote>
 <p>JS引擎在使用变量时，他们的得生命周期包含三个部分:<strong>声明阶段</strong>、<strong>初始化阶段</strong>、<strong>赋值阶段</strong>。<br>比如，以下代码就会报错<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> x = <span class="string">"a"</span>;</div><div class="line"><span class="keyword">var</span> x = <span class="string">"b"</span>;      <span class="comment">// redeclared error</span></div><div class="line"><span class="keyword">let</span> t = t;        <span class="comment">// undefined error</span></div></pre></td></tr></table></figure></p>
 <p>相关联的有那个变量声明提升以及匿名函数声明提前.<br>比如:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">10</span>;</div><div class="line">!<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(a);   <span class="comment">// undefined</span></div><div class="line">  a = <span class="number">1</span>;</div><div class="line">  <span class="built_in">console</span>.log(a);   <span class="comment">// 1</span></div><div class="line">  <span class="keyword">var</span> a = <span class="number">2</span>;</div><div class="line">  <span class="built_in">console</span>.log(a);   <span class="comment">// 2</span></div><div class="line">&#125;();</div></pre></td></tr></table></figure></p>
+<p>注意网上关于let/const是否存在hoisting是有争议的，主要争议来源MDN上明确说let不支持hoisting,而Ecmscript里提到过let/const hoisting这个关键词。我个人理解是hoisting只是一个概念，而且本身并没有准确的定义，其实只要知道js引擎在处理var和let/const的区别就可以了，没必要把这个概念强加在let上。</p>
 <p>参考文章:<a href="http://www.qcyoung.com/2016/08/03/%E3%80%90%E8%AF%91%E3%80%91JavaScript%20%E5%8F%98%E9%87%8F%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%20let%20%E4%B8%8D%E5%AD%98%E5%9C%A8%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87/" target="_blank" rel="external">【译】JavaScript 变量的生命周期：为什么 let 不存在变量提升</a></p>
 <h4 id="引用传值问题"><a href="#引用传值问题" class="headerlink" title="引用传值问题"></a>引用传值问题</h4><p>之前对此我也很疑惑，后来发现只要这样理解就可以了.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> b = a = &#123; <span class="attr">n</span>: <span class="number">1</span> &#125;;</div><div class="line">a.x = a = &#123; <span class="attr">n</span>: <span class="number">2</span> &#125;;</div><div class="line"><span class="built_in">console</span>.log(a.x);   <span class="comment">// undefined</span></div><div class="line"><span class="built_in">console</span>.log(b.x);   <span class="comment">// &#123; n: 2 &#125;</span></div></pre></td></tr></table></figure></p>
 <p>结果可能跟你想象的不太一样！我的理解是在解释器在进行编译时，执行a.x = a = { n: 2 }时，a均是指向的初始地址{ n: 1 }所处的地址空间，也即b指向的地址.<br>a = { n: 2 }所做的操作即是a重新指向另外一个存储{ n: 2 }的地址.前面已经说过了，a.x指向的仍旧是原来的地址.最后结果就是:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">a = &#123; <span class="attr">n</span>: <span class="number">2</span> &#125;</div><div class="line">b = &#123;</div><div class="line">  <span class="attr">n</span>: <span class="number">1</span>,</div><div class="line">  <span class="attr">x</span>: &#123;</div><div class="line">    <span class="attr">n</span>: <span class="number">2</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -559,7 +564,8 @@
           
 
         </nav>
-
+        <!-- 网易云音乐 -->
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=677243&auto=1&height=66"></iframe>
         
 
         <div class="links-of-author motion-element">
@@ -624,6 +630,26 @@
 
 
         
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv">0</span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv">0</span>
+      
+    </span>
+  
+</div>
+
 
         
       </div>

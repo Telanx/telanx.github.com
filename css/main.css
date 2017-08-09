@@ -1868,9 +1868,6 @@ pre .javascript .function {
 .theme-info {
   display: block;
 }
-.powered-by {
-  margin-right: 10px;
-}
 .cc-license {
   margin-top: 10px;
   text-align: center;
@@ -2263,6 +2260,9 @@ pre .javascript .function {
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   color: #ccc;
+}
+.busuanzi-count {
+  text-align: center;
 }
 .site-uv,
 .site-pv,
