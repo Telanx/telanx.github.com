@@ -1,0 +1,713 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="我们知道在Vue中通过render函数可以自定义渲染,可以通过createElement创建VNode(Vue2.x开始支持了JSX生成VNode)。下面是通过createElement和JSX创建的一个例子:1234567891011121314// 使用createElement创建render: (h, &amp;#123;row&amp;#125;) =&amp;gt; &amp;#123;  return h(&apos;p&apos;,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue在JSX中使用全局安装的组件">
+<meta property="og:url" content="http://yoursite.com/2017/08/25/Vue在JSX中使用全局安装的组件/index.html">
+<meta property="og:site_name" content="Telanx">
+<meta property="og:description" content="我们知道在Vue中通过render函数可以自定义渲染,可以通过createElement创建VNode(Vue2.x开始支持了JSX生成VNode)。下面是通过createElement和JSX创建的一个例子:1234567891011121314// 使用createElement创建render: (h, &amp;#123;row&amp;#125;) =&amp;gt; &amp;#123;  return h(&apos;p&apos;,">
+<meta property="og:updated_time" content="2017-08-25T02:11:25.194Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue在JSX中使用全局安装的组件">
+<meta name="twitter:description" content="我们知道在Vue中通过render函数可以自定义渲染,可以通过createElement创建VNode(Vue2.x开始支持了JSX生成VNode)。下面是通过createElement和JSX创建的一个例子:1234567891011121314// 使用createElement创建render: (h, &amp;#123;row&amp;#125;) =&amp;gt; &amp;#123;  return h(&apos;p&apos;,">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/25/Vue在JSX中使用全局安装的组件/"/>
+
+
+
+
+
+  <title> Vue在JSX中使用全局安装的组件 | Telanx </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a link="/"  class="brand" rel="start">
+        <!--<span class="logo-line-before"><i></i></span>-->
+        <span class="site-title">Telanx</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              
+                <i class="menu-item-icon fa fa-fw fa-home"></i>
+               
+              <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              
+                <i class="menu-item-icon fa fa-fw fa-archive"></i>
+               
+              <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              
+                <i class="menu-item-icon fa fa-fw fa-user"></i>
+               
+              <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+      <li class="menu-item menu-item-zard">
+        <a href="/zard" rel="section">
+          ZARD
+        </a>
+      </li>
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/25/Vue在JSX中使用全局安装的组件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Telanx">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Telanx">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Vue在JSX中使用全局安装的组件
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-25T09:17:30+08:00">
+                2017-08-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/08/25/Vue在JSX中使用全局安装的组件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/08/25/Vue在JSX中使用全局安装的组件/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我们知道在Vue中通过render函数可以自定义渲染,可以通过createElement创建VNode(Vue2.x开始支持了JSX生成VNode)。下面是通过createElement和JSX创建的一个例子:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 使用createElement创建</span></div><div class="line">render: <span class="function">(<span class="params">h, &#123;row&#125;</span>) =&gt;</span> &#123;</div><div class="line">  <span class="keyword">return</span> h(<span class="string">'p'</span>, &#123;</div><div class="line">    <span class="attr">style</span>: &#123;</div><div class="line">      <span class="attr">fontSize</span>: <span class="string">'14px'</span>,</div><div class="line">      <span class="attr">color</span>: <span class="string">'#f00'</span></div><div class="line">    &#125;</div><div class="line">  &#125;, [row.text]);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 使用jsx创建</span></div><div class="line">render: <span class="function">(<span class="params">h, &#123;row&#125;</span>) =&gt;</span> (</div><div class="line">  &lt;p style=&#123;&#123; color: '#f00', fontSize: '14px' &#125;&#125;&gt;&#123; row.text &#125;&lt;/p&gt;</div><div class="line">)</div></pre></td></tr></table></figure></p>
+<p>习惯了使用XML方式画UI，显然通过createElement创建的方式没有JSX来的直观。Vue也有介绍JSX在Vue和React里的区别(事实上，vue通过babel-plugin-transform-vue-jsx实现了将JSX转化为VNode)。常规组件(即标准的HTML标签)和React差不多，自定义组件可以通过导入组件然后使用的方式来创建:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> CustomCmp <span class="keyword">from</span> <span class="string">'@/src/components/CustomCmp'</span>;</div><div class="line"></div><div class="line">&lt;CustomCmp /&gt;</div></pre></td></tr></table></figure></p>
+<p>那么对于全局安装的组件，如何在JSX中使用呢？值得注意的是，使用createElement来创建VNode却可以直接使用全局组件,JSX中却不行。下面是<code>_createElement</code>的实现<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">_createElement</span> (<span class="params"></span></span></div><div class="line">  context,</div><div class="line">  tag,</div><div class="line">  data,</div><div class="line">  children,</div><div class="line">  normalizationType</div><div class="line">) &#123;</div><div class="line">  <span class="keyword">if</span> (isDef(data) &amp;&amp; isDef((data).__ob__)) &#123;</div><div class="line">    process.env.NODE_ENV !== <span class="string">'production'</span> &amp;&amp; warn(</div><div class="line">      <span class="string">"Avoid using observed data object as vnode data: "</span> + (<span class="built_in">JSON</span>.stringify(data)) + <span class="string">"\n"</span> +</div><div class="line">      <span class="string">'Always create fresh vnode data objects in each render!'</span>,</div><div class="line">      context</div><div class="line">    );</div><div class="line">    <span class="keyword">return</span> createEmptyVNode()</div><div class="line">  &#125;</div><div class="line">  <span class="comment">// object syntax in v-bind</span></div><div class="line">  <span class="keyword">if</span> (isDef(data) &amp;&amp; isDef(data.is)) &#123;</div><div class="line">    tag = data.is;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span> (!tag) &#123;</div><div class="line">    <span class="comment">// in case of component :is set to falsy value</span></div><div class="line">    <span class="keyword">return</span> createEmptyVNode()</div><div class="line">  &#125;</div><div class="line">  <span class="comment">// warn against non-primitive key</span></div><div class="line">  <span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">'production'</span> &amp;&amp;</div><div class="line">    isDef(data) &amp;&amp; isDef(data.key) &amp;&amp; !isPrimitive(data.key)</div><div class="line">  ) &#123;</div><div class="line">    warn(</div><div class="line">      <span class="string">'Avoid using non-primitive value as key, '</span> +</div><div class="line">      <span class="string">'use string/number value instead.'</span>,</div><div class="line">      context</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">  <span class="comment">// support single function children as default scoped slot</span></div><div class="line">  <span class="keyword">if</span> (<span class="built_in">Array</span>.isArray(children) &amp;&amp;</div><div class="line">    <span class="keyword">typeof</span> children[<span class="number">0</span>] === <span class="string">'function'</span></div><div class="line">  ) &#123;</div><div class="line">    data = data || &#123;&#125;;</div><div class="line">    data.scopedSlots = &#123; <span class="attr">default</span>: children[<span class="number">0</span>] &#125;;</div><div class="line">    children.length = <span class="number">0</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span> (normalizationType === ALWAYS_NORMALIZE) &#123;</div><div class="line">    children = normalizeChildren(children);</div><div class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (normalizationType === SIMPLE_NORMALIZE) &#123;</div><div class="line">    children = simpleNormalizeChildren(children);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">var</span> vnode, ns;</div><div class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> tag === <span class="string">'string'</span>) &#123;</div><div class="line">    <span class="keyword">var</span> Ctor;</div><div class="line">    ns = config.getTagNamespace(tag);</div><div class="line">    <span class="keyword">if</span> (config.isReservedTag(tag)) &#123;</div><div class="line">      <span class="comment">// platform built-in elements</span></div><div class="line">      vnode = <span class="keyword">new</span> VNode(</div><div class="line">        config.parsePlatformTagName(tag), data, children,</div><div class="line">        <span class="literal">undefined</span>, <span class="literal">undefined</span>, context</div><div class="line">      );</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isDef(Ctor = resolveAsset(context.$options, <span class="string">'components'</span>, tag))) &#123;</div><div class="line">      <span class="comment">// 这里就是为什么通过createElement可以使用全局挂在的组件原因</span></div><div class="line">      vnode = createComponent(Ctor, data, context, children, tag);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      vnode = <span class="keyword">new</span> VNode(</div><div class="line">        tag, data, children,</div><div class="line">        <span class="literal">undefined</span>, <span class="literal">undefined</span>, context</div><div class="line">      );</div><div class="line">    &#125;</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="comment">// direct component options / constructor</span></div><div class="line">    vnode = createComponent(tag, data, context, children);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span> (isDef(vnode)) &#123;</div><div class="line">    <span class="keyword">if</span> (ns) &#123; applyNS(vnode, ns); &#125;</div><div class="line">    <span class="keyword">return</span> vnode</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">return</span> createEmptyVNode()</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可以看出通过createElement可以使用全局组件原因在于这个函数有携带上下文环境context，继续查找<code>resolveAsset</code>函数，如下:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Resolve an asset.</div><div class="line"> * This function is used because child instances need access</div><div class="line"> * to assets defined in its ancestor chain.</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">resolveAsset</span> (<span class="params"></span></span></div><div class="line">  options,</div><div class="line">  type,</div><div class="line">  id,</div><div class="line">  warnMissing</div><div class="line">) &#123;</div><div class="line">  <span class="comment">/* istanbul ignore if */</span></div><div class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> id !== <span class="string">'string'</span>) &#123;</div><div class="line">    <span class="keyword">return</span></div><div class="line">  &#125;</div><div class="line">  <span class="comment">// 这里通过createElement创建时type为componets,options为vm.$options</span></div><div class="line">  <span class="comment">// 即assets = vm.$options.components</span></div><div class="line">  <span class="keyword">var</span> assets = options[type];</div><div class="line">  <span class="comment">// check local registration variations first</span></div><div class="line">  <span class="keyword">if</span> (hasOwn(assets, id)) &#123; <span class="keyword">return</span> assets[id] &#125;</div><div class="line">  <span class="keyword">var</span> camelizedId = camelize(id);</div><div class="line">  <span class="keyword">if</span> (hasOwn(assets, camelizedId)) &#123; <span class="keyword">return</span> assets[camelizedId] &#125;</div><div class="line">  <span class="keyword">var</span> PascalCaseId = capitalize(camelizedId);</div><div class="line">  <span class="keyword">if</span> (hasOwn(assets, PascalCaseId)) &#123; <span class="keyword">return</span> assets[PascalCaseId] &#125;</div><div class="line">  <span class="comment">// fallback to prototype chain</span></div><div class="line">  <span class="keyword">var</span> res = assets[id] || assets[camelizedId] || assets[PascalCaseId];</div><div class="line">  <span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">'production'</span> &amp;&amp; warnMissing &amp;&amp; !res) &#123;</div><div class="line">    warn(</div><div class="line">      <span class="string">'Failed to resolve '</span> + type.slice(<span class="number">0</span>, <span class="number">-1</span>) + <span class="string">': '</span> + id,</div><div class="line">      options</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可以看出，它会在<code>vm.$options.components</code>里查找，不管传入的是驼峰命名也好，帕斯卡命名也好都会尝试进行查找，最后找不到才去原型链上查找。因此，想要在JSX中使用全局安装的自定义组件，可以按如下方式使用:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">render: <span class="function">(<span class="params">h</span>) =&gt;</span> &#123;</div><div class="line">  <span class="keyword">let</span> &#123; GlobalCustomCmp1, GlobalCustomCmp2 &#125; = <span class="keyword">this</span>.$options.components;</div><div class="line">  <span class="keyword">return</span> (</div><div class="line">    &lt;div&gt;</div><div class="line">      &lt;GlobalCustomCmp1 /&gt;</div><div class="line">      &lt;GlobalCustomCmp2 /&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  );</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 当然也可以使用with来注入全部全局组件，简化代码</span></div><div class="line">render: <span class="function">(<span class="params">h</span>) =&gt;</span> &#123;</div><div class="line">  <span class="keyword">with</span> (<span class="keyword">this</span>.$options.components) &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      &lt;div&gt;</div><div class="line">        &lt;GlobalCustomCmp1 /&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意: with不能在严格模式(strict)下使用</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/03/python学习笔记/" rel="next" title="python学习笔记">
+                <i class="fa fa-chevron-left"></i> python学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Telanx" />
+          <p class="site-author-name" itemprop="name">Telanx</p>
+           
+              <p class="site-description motion-element" itemprop="description">Where there is a will, there is a way!</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+        <!-- 网易云音乐 -->
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=677243&auto=1&height=66"></iframe>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+      
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Telanx</span>
+</div>
+
+
+<div class="powered-by">
+  由Hexo & Mist@NextT 强力驱动
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv">0</span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv">0</span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://telanx.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/08/25/Vue在JSX中使用全局安装的组件/';
+          this.page.identifier = '2017/08/25/Vue在JSX中使用全局安装的组件/';
+          this.page.title = 'Vue在JSX中使用全局安装的组件';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://telanx.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
