@@ -1,0 +1,823 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="订阅发布+Iterator模式123456789101112131415161718192021222324252627// 订阅发布模式function Observer() &amp;#123;  this.listeners = &amp;#123;&amp;#125;;&amp;#125;Observer.prototype.subscribe = function (id, fn) &amp;#123;  Object.ass">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RxJs学习笔记">
+<meta property="og:url" content="http://yoursite.com/2017/09/11/RxJs学习笔记/index.html">
+<meta property="og:site_name" content="Telanx">
+<meta property="og:description" content="订阅发布+Iterator模式123456789101112131415161718192021222324252627// 订阅发布模式function Observer() &amp;#123;  this.listeners = &amp;#123;&amp;#125;;&amp;#125;Observer.prototype.subscribe = function (id, fn) &amp;#123;  Object.ass">
+<meta property="og:image" content="http://yoursite.com/images/时间轴操作.png">
+<meta property="og:updated_time" content="2017-09-29T02:25:44.697Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RxJs学习笔记">
+<meta name="twitter:description" content="订阅发布+Iterator模式123456789101112131415161718192021222324252627// 订阅发布模式function Observer() &amp;#123;  this.listeners = &amp;#123;&amp;#125;;&amp;#125;Observer.prototype.subscribe = function (id, fn) &amp;#123;  Object.ass">
+<meta name="twitter:image" content="http://yoursite.com/images/时间轴操作.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/11/RxJs学习笔记/"/>
+
+
+
+
+
+  <title> RxJs学习笔记 | Telanx </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a link="/"  class="brand" rel="start">
+        <!--<span class="logo-line-before"><i></i></span>-->
+        <span class="site-title">Telanx</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              
+                <i class="menu-item-icon fa fa-fw fa-home"></i>
+               
+              <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              
+                <i class="menu-item-icon fa fa-fw fa-archive"></i>
+               
+              <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              
+                <i class="menu-item-icon fa fa-fw fa-user"></i>
+               
+              <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+      <li class="menu-item menu-item-zard">
+        <a href="/zard" rel="section">
+          ZARD
+        </a>
+      </li>
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/11/RxJs学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Telanx">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Telanx">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                RxJs学习笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-11T18:25:36+08:00">
+                2017-09-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/09/11/RxJs学习笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/09/11/RxJs学习笔记/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="订阅发布-Iterator模式"><a href="#订阅发布-Iterator模式" class="headerlink" title="订阅发布+Iterator模式"></a>订阅发布+Iterator模式</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 订阅发布模式</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Observer</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">this</span>.listeners = &#123;&#125;;</div><div class="line">&#125;</div><div class="line">Observer.prototype.subscribe = <span class="function"><span class="keyword">function</span> (<span class="params">id, fn</span>) </span>&#123;</div><div class="line">  <span class="built_in">Object</span>.assign(<span class="keyword">this</span>.listeners, &#123; <span class="attr">id</span>: fn &#125;);</div><div class="line">&#125;</div><div class="line">Observer.prototype.unsubscribe = <span class="function"><span class="keyword">function</span> (<span class="params">id</span>) </span>&#123;</div><div class="line">  <span class="keyword">delete</span> <span class="keyword">this</span>.listeners[id];</div><div class="line">&#125;</div><div class="line">Observer.prototype.publish = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> id = <span class="built_in">arguments</span>[<span class="number">0</span>];</div><div class="line">  <span class="keyword">this</span>.listeners[id].apply(<span class="literal">null</span>. arguments.slice(<span class="number">1</span>));</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// iterator模式</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Iterator</span>(<span class="params">arr, divisor</span>) </span>&#123;</div><div class="line">  <span class="keyword">this</span>.currentIndex = <span class="number">0</span>;</div><div class="line">  <span class="keyword">this</span>.array = arr;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Iterator.prototype.next = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.currentIndex &gt;= <span class="keyword">this</span>.array.length) &#123;</div><div class="line">    <span class="keyword">return</span> &#123; <span class="attr">value</span>: <span class="literal">undefined</span>, <span class="attr">done</span>: <span class="literal">true</span> &#125;;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> &#123; <span class="attr">value</span>: <span class="keyword">this</span>.array[<span class="keyword">this</span>.currentIndex++], <span class="attr">done</span>: <span class="literal">false</span> &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="一些基本概念"><a href="#一些基本概念" class="headerlink" title="一些基本概念"></a>一些基本概念</h3><ul>
+<li><strong>Observable 可观察对象</strong><br>表示一个可调用的未来值或者事件的集合</li>
+<li><strong>Observer 观察者</strong><br>一个回调函数的集合，它知道怎样去监听被Observable发送的值</li>
+<li><strong>Subscription 订阅</strong><br>表示一个可观察对象的执行，主要用于取消执行</li>
+<li><strong>Operators 操作符</strong><br>纯粹的函数，使得以函数编程的方式处理集合比如:map,filter,concat,flatMap</li>
+<li><strong>Subject 主题</strong><br>等同于一个事件驱动器，是将一个值或者事件广播到多个观察者的唯一途径</li>
+<li><strong>Schedulers 调度者</strong><br>用来控制并发，当计算发生的时候允许我们协调，比如setTimeout,requestAnimation等</li>
+</ul>
+<h3 id="常用API"><a href="#常用API" class="headerlink" title="常用API"></a>常用API</h3><ol>
+<li><strong>创建数据流</strong></li>
+</ol>
+<ul>
+<li><strong>单值</strong>: of,empty,never</li>
+<li><strong>多值</strong>: from</li>
+<li><strong>定时</strong>: interval, timer</li>
+<li><strong>从Promise创建</strong>: fromPromise</li>
+<li><strong>自定义创建</strong>: create</li>
+<li><strong>把callback</strong> bindCallback写法转换成链式写法,bindNodeCallback将一个NodeJs风格的回调函数API转化为一个能返回可观察对象的函数<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> exists = Rx.Observable.bindCallback(fs.exists);</div><div class="line">exists(<span class="string">'file.txt'</span>).subscribe(<span class="function"><span class="params">exist</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'exists?'</span> + exists));</div><div class="line"></div><div class="line"><span class="keyword">import</span> * <span class="keyword">as</span> fs <span class="keyword">from</span> <span class="string">'fs'</span>;</div><div class="line"><span class="keyword">var</span> readFileObservable = Rx.Observable.bindNodeCallback(fs.readFile);</div><div class="line"><span class="keyword">var</span> result = readFileAsObservable(<span class="string">'./roadNames.txt'</span>, <span class="string">'utf-8'</span>);</div><div class="line">result.subscribe(<span class="function"><span class="params">x</span> =&gt;</span> <span class="built_in">console</span>.log(x), e =&gt; <span class="built_in">console</span>.error(e));</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol>
+<li><strong>转换</strong></li>
+</ol>
+<ul>
+<li><strong>改变数据形态</strong>: map,mapTo,pluck</li>
+<li><strong>过滤一些值</strong>:filter,skip,first,last,take,distinct,distance</li>
+<li><strong>时间轴上的操作</strong>:delay, timeout,throttle,debounceTime,audit,bufferTime</li>
+<li><strong>累加</strong>:reduce,scan</li>
+<li><strong>异常处理</strong>: throw,catch,retry,finally</li>
+<li><strong>条件执行</strong>: takeUntil,delayWhen,retryWhen,subscribeOn,ObserveOn</li>
+<li><strong>转接</strong>:switch</li>
+</ul>
+<ol>
+<li><strong>组合</strong></li>
+</ol>
+<ul>
+<li><strong>concat</strong> 保持原来的序列顺序连接两个数据流(顺序连接2个数据流)</li>
+<li><strong>merge</strong> 合并序列</li>
+<li><strong>race</strong> 预设条件为其中一个数据流完成</li>
+<li><strong>forkJoin</strong> 预设条件为所有数据流都完成</li>
+<li><strong>zip</strong> 取各来源数据流最后一个值合并为对象</li>
+<li><strong>combineLatest</strong> 取各来源数据流最后一个值合并为数组</li>
+</ul>
+<h3 id="Subject"><a href="#Subject" class="headerlink" title="Subject"></a>Subject</h3><p>Subject是允许值被多播到多个观察者的一种特殊的Observable，然而纯粹的可观察对象是单播的(每一个订阅的观察者拥有单独的可观察对象的执行)<br>每一个Subject都是一个Observable可观察对象，给定Subject后，你可以订阅它，提供的观察者将会按正常的开始接收值，从观察者角度来看，它不能判断一个可观察对象的执行时来自于单播Observable还是来自于Subject<br>同时每一个Subject都是一个Observer观察者对象，拥有next、error、complete方法<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> subject = <span class="keyword">new</span> Rx.Subject();</div><div class="line">subject.subscribe(</div><div class="line">  next: <span class="function"><span class="params">v</span> =&gt;</span> <span class="built_in">console</span>.log(v)</div><div class="line">);</div><div class="line">subject.subscribe(</div><div class="line">  next: <span class="function"><span class="params">v</span> =&gt;</span> <span class="built_in">console</span>.log(v)</div><div class="line">);</div><div class="line">subject.next(<span class="number">1</span>);</div><div class="line">subject.next(<span class="number">2</span>);</div><div class="line"><span class="comment">// 输出1 1 2 2</span></div><div class="line"></div><div class="line"><span class="comment">// 由于Subject也是一个观察者，所以可以当Observable.subscribe(observer)参数</span></div></pre></td></tr></table></figure></p>
+<p>一个多播的可观察对象通过具有多个订阅者的Subject对象传递通知。然而一个单纯的单播可观察对象仅仅给一个单一的观察者发送通知。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> source = Rx.Observable.from([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</div><div class="line"><span class="keyword">var</span> subject = <span class="keyword">new</span> Rx.Subject();</div><div class="line"><span class="keyword">var</span> multicasted = source.multicast(subject);</div><div class="line">multicasted.subscribe(&#123;</div><div class="line">  <span class="attr">next</span>: <span class="function"><span class="params">v</span> =&gt;</span> <span class="built_in">console</span>.log(v)</div><div class="line">&#125;);</div><div class="line">multicasted.subscribe(&#123;</div><div class="line">  <span class="attr">next</span>: <span class="function"><span class="params">v</span> =&gt;</span> <span class="built_in">console</span>.log(v);</div><div class="line">&#125;);</div><div class="line">multicasted.connect();</div></pre></td></tr></table></figure></p>
+<h3 id="Subscription"><a href="#Subscription" class="headerlink" title="Subscription"></a>Subscription</h3><p>订阅是一个表示一次性资源的对象，通常是一个可观察对象的执行。订阅对象有一个很重要的方法:unsubscribe,仅仅废弃掉可观察对象所持有的资源。<br>通过add添加取消订阅之后会一同取消订阅。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> observable = Rx.Observable.interval(<span class="number">1000</span>);</div><div class="line"><span class="keyword">var</span> subscription = observable.subscribe(<span class="function"><span class="params">x</span> =&gt;</span> <span class="built_in">console</span>.log(x));</div><div class="line"><span class="comment">// ...</span></div><div class="line">subscription.unsubscribe();</div><div class="line"></div><div class="line"><span class="comment">// example2</span></div><div class="line"><span class="keyword">var</span> observable1 = Rx.Observable.interval(<span class="number">400</span>);</div><div class="line"><span class="keyword">var</span> observable2 = Rx.Observable.interval(<span class="number">300</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> subscription = observable1.subscribe(<span class="function"><span class="params">x</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'first'</span> + x));</div><div class="line"><span class="keyword">var</span> childSubscription = observable2.subscribe(<span class="function"><span class="params">x</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'second'</span> + x));</div><div class="line"></div><div class="line"><span class="comment">// example3</span></div><div class="line"><span class="keyword">var</span> observable3 = Rx.Observable</div></pre></td></tr></table></figure></p>
+<h3 id="Scheduler调度者"><a href="#Scheduler调度者" class="headerlink" title="Scheduler调度者"></a>Scheduler调度者</h3><ul>
+<li>一个调度者是一个数据结构。它知道如何根据优先级或其它标准存储和排列任务</li>
+<li>一个调度者是一个执行上下文.它表示何处何时任务被执行(如immediately立即，or in another callback mechanism回调机制例如setTimeout、process.nextTick或animation frame)</li>
+<li>一个调度者具有虚拟的时钟。它通过调度器上的getter方法now()提供了时间的概念。在特定调度程序上调度的任务将紧紧遵守由该时钟表示的时间<br>调度者使得你可以确定可观察对象在什么执行上下文中给观察者发送通知。<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> observable = Rx.Ovservable.create(<span class="function"><span class="params">observer</span> =&gt;</span> &#123;</div><div class="line">  observer.next(<span class="number">1</span>);</div><div class="line">  observer.next(<span class="number">2</span>);</div><div class="line">  observer.next(<span class="number">3</span>);</div><div class="line">  observer.complete();</div><div class="line">&#125;).observeOn(Rx.Scheduler.async);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'just before subscribe'</span>);</div><div class="line">observable.subscribe(&#123;</div><div class="line">  <span class="attr">next</span>: <span class="function"><span class="params">x</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'got value'</span> + x),</div><div class="line">  <span class="attr">error</span>: <span class="function"><span class="params">err</span> =&gt;</span> <span class="built_in">console</span>.error(<span class="string">'something wrong occurred:'</span> + err),</div><div class="line">  <span class="attr">complete</span>: <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'done'</span>)</div><div class="line">&#125;);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'just after subscribe'</span>);</div><div class="line"></div><div class="line">observer是一个代理,具体讲会由Rx.Scheduler.async替代</div><div class="line"><span class="keyword">var</span> proxyObserver = &#123;</div><div class="line">  <span class="attr">next</span>: <span class="function"><span class="params">val</span> =&gt;</span> &#123;</div><div class="line">    Rx.Scheduler.</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="对时间轴操作"><a href="#对时间轴操作" class="headerlink" title="对时间轴操作"></a>对时间轴操作</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> timeA$ = Rx.Observable.interval(<span class="number">10000</span>);</div><div class="line"><span class="keyword">const</span> timeB$ = timeA$.filter(<span class="function"><span class="params">num</span> =&gt;</span> &#123;</div><div class="line">  <span class="keyword">return</span> (num % <span class="number">2</span> != <span class="number">0</span>)</div><div class="line">    &amp;&amp; (num % <span class="number">3</span> != <span class="number">0</span>)</div><div class="line">    &amp;&amp; (num % <span class="number">5</span> != <span class="number">0</span>)</div><div class="line">    &amp;&amp; (num % <span class="number">7</span> != <span class="number">0</span>)</div><div class="line">&#125;);</div><div class="line"><span class="keyword">const</span> timeC$ = timeB$.debounceTime(<span class="number">3000</span>);</div><div class="line"><span class="keyword">const</span> timeD$ = timeC$.delay(<span class="number">2000</span>);</div></pre></td></tr></table></figure>
+<p>结果如下:<br><img src="/images/时间轴操作.png" alt="时间轴操作"></p>
+<h3 id="producing-values产生值"><a href="#producing-values产生值" class="headerlink" title="producing values产生值"></a>producing values产生值</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// typing "hello world"</span></div><div class="line"><span class="keyword">var</span> input = Rx.Observable.fromEvent(<span class="built_in">document</span>.querySelector(<span class="string">'input'</span>), <span class="string">'keypress'</span>);</div><div class="line"></div><div class="line"><span class="comment">// Pass on a new value</span></div><div class="line">input.map(<span class="function"><span class="params">event</span> =&gt;</span> event.target.value)</div><div class="line">  .subscribe(<span class="function"><span class="params">value</span> =&gt;</span> <span class="built_in">console</span>.log(value)); <span class="comment">// "h"</span></div><div class="line"></div><div class="line"><span class="comment">// Pass on a new value by plucking it</span></div><div class="line">input.pluck(<span class="string">'target'</span>, <span class="string">'value'</span>)</div><div class="line">  .subscribe(<span class="function"><span class="params">value</span> =&gt;</span> <span class="built_in">console</span>.log(value)); <span class="comment">// "h"</span></div><div class="line"></div><div class="line"><span class="comment">// Pass the two previous values</span></div><div class="line">input.pluck(<span class="string">'target'</span>, <span class="string">'value'</span>).pairwise()</div><div class="line">  .subscribe(<span class="function"><span class="params">value</span> =&gt;</span> <span class="built_in">console</span>.log(value)); <span class="comment">// ["h", "e"]</span></div><div class="line"></div><div class="line"><span class="comment">// Only pass unique values through</span></div><div class="line">input.pluck(<span class="string">'target'</span>, <span class="string">'value'</span>).distinct()</div><div class="line">  .subscribe(<span class="function"><span class="params">value</span> =&gt;</span> <span class="built_in">console</span>.log(value)); <span class="comment">// "helo wrd"</span></div><div class="line"></div><div class="line"><span class="comment">// Do not pass repeating values through</span></div><div class="line">input.pluck(<span class="string">'target'</span>, <span class="string">'value'</span>).distinctUntilChanged()</div><div class="line">  .subscribe(<span class="function"><span class="params">value</span> =&gt;</span> <span class="built_in">console</span>.log(value)); <span class="comment">// "helo world"</span></div></pre></td></tr></table></figure>
+<h3 id="concat顺序组合发出"><a href="#concat顺序组合发出" class="headerlink" title="concat顺序组合发出"></a>concat顺序组合发出</h3><h3 id="combineLatest组合多个Observable生成一个新的Observable"><a href="#combineLatest组合多个Observable生成一个新的Observable" class="headerlink" title="combineLatest组合多个Observable生成一个新的Observable"></a>combineLatest组合多个Observable生成一个新的Observable</h3><p>组合多个Observable产生一个新的Observable，其发射的值根据其每个输入Observable的最新值计算。(无论何时作为输入的Observable发出的一个值，它取得所有输入的最新值作为它的发射值)<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> weight = Rx.Observable.of(<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>);</div><div class="line"><span class="keyword">var</span> height = Rx.Observable.of(<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">10</span>);</div><div class="line"><span class="keyword">var</span> bmi = Rx.Observable.combineLatest(weight, height, (w, h) =&gt; [w,h]);</div><div class="line">bmi.subscribe(<span class="function"><span class="params">x</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'BMI is'</span> + x)) </div><div class="line"><span class="comment">// [9,2] [9,4] [9,6] [9,8] [9,10]</span></div><div class="line"><span class="comment">// 取combineLatest最后一个值和另外一个进行组合</span></div></pre></td></tr></table></figure></p>
+<h3 id="defer"><a href="#defer" class="headerlink" title="defer"></a>defer</h3><p>以惰性的方式产生一个Observable，也就是说当订阅的时候才会产生<br>public static defer(observableFactory: function(): Observable | Promise): Observable<br>等待一个Observer订阅它然后生成一个Observable，通常有一个Observable工厂函数。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> clickOrInterval = Rx.Observable.defer(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (<span class="built_in">Math</span>.random() &gt; <span class="number">0.5</span>) &#123;</div><div class="line">    <span class="keyword">return</span> Rx.Observable.fromEvent(<span class="built_in">document</span>, <span class="string">'click'</span>);</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">return</span> Rx.Observable.interval(<span class="number">1000</span>);</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line">clickOrInterval.subscribe(<span class="function"><span class="params">x</span> =&gt;</span> <span class="built_in">console</span>.log(x));</div><div class="line"></div><div class="line"><span class="comment">/** Using a promise **/</span></div><div class="line"><span class="keyword">var</span> source = Rx.Observable.defer(<span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">Promise</span>.resolve(<span class="number">42</span>));</div><div class="line"></div><div class="line"><span class="keyword">var</span> subscription = source.subscribe(</div><div class="line">  <span class="function"><span class="params">x</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">`onNext:<span class="subst">$&#123;x&#125;</span>`</span>),</div><div class="line">  e =&gt; <span class="built_in">console</span>.log(<span class="string">`onError:<span class="subst">$&#123;e&#125;</span>`</span>),</div><div class="line">  () =&gt; <span class="built_in">console</span>.log(<span class="string">'onCompleted'</span>)</div><div class="line">)</div></pre></td></tr></table></figure></p>
+<h3 id="empty"><a href="#empty" class="headerlink" title="empty"></a>empty</h3><p><code>public static empty(scheduler: Scheduler): Observable</code><br>创建一个不发射任何值得Observable，它只会发射一个complete通知<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> result = Rx.Observable.empty().startWith(<span class="number">7</span>)</div><div class="line">result.subscribe(<span class="function"><span class="params">x</span> =&gt;</span> <span class="built_in">console</span>.log(x))</div><div class="line"></div><div class="line"><span class="keyword">var</span> interval = Rx.Observable.interval(<span class="number">1000</span>)</div></pre></td></tr></table></figure></p>
+<h3 id="switchMap和mergeMap区别"><a href="#switchMap和mergeMap区别" class="headerlink" title="switchMap和mergeMap区别"></a>switchMap和mergeMap区别</h3><p>switchMap与mergeMap都是将分支流疏通到主干上，而不同的地方在于switchMap只会保留最后的流而取消抛弃之前的流</p>
+<h3 id="forkJoin"><a href="#forkJoin" class="headerlink" title="forkJoin"></a>forkJoin</h3><p><code>Rx.Observable.forkJoin(...args [resultSelector])</code><br>并行运行所有可观察序列并收集其最后的元素<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> source = Rx.Observer.forkJoin(</div><div class="line">  Rx.Observable.return(<span class="number">42</span>),</div><div class="line">  Rx.Observable.range(<span class="number">0</span>, <span class="number">10</span>),</div><div class="line">  Rx.Observable.fromArray([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]),</div><div class="line">  <span class="built_in">Promise</span>.resolve(<span class="number">56</span>)</div><div class="line">);</div><div class="line"><span class="keyword">var</span> subscription = source.subscribe(</div><div class="line">  <span class="function"><span class="params">x</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'onNext'</span> + x),</div><div class="line">  e =&gt; <span class="built_in">console</span>.log(<span class="string">'onError:'</span> + e),</div><div class="line">  () =&gt; <span class="built_in">console</span>.log(<span class="string">'onCompleted'</span>)</div><div class="line">);</div><div class="line"><span class="comment">// 最后示例range里的数据只有最后一个</span></div></pre></td></tr></table></figure></p>
+<h3 id="from"><a href="#from" class="headerlink" title="from"></a>from</h3><p><code>public static from(ish: ObservableInput&lt;T&gt;, scheduler: Scheduler): Observable&lt;T&gt;</code><br>将一个数组，类数组(字符串也可以)，Promise，可迭代对象，类可观察对象，转化为Observable<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 无限迭代对象</span></div><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">generateDoubles</span>(<span class="params">seed</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> i = seed;</div><div class="line">  <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</div><div class="line">    <span class="keyword">yield</span> i;</div><div class="line">    i = <span class="number">2</span> * i;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> iterator = generateDoubles(<span class="number">3</span>);</div><div class="line"><span class="keyword">var</span> result = Rx.Observable.from(iterator);</div><div class="line">result.subscribe(<span class="function"><span class="params">x</span> =&gt;</span> <span class="built_in">console</span>.log(x))</div></pre></td></tr></table></figure></p>
+<h3 id="fromEvent"><a href="#fromEvent" class="headerlink" title="fromEvent"></a>fromEvent</h3><p><code>Rx.Observable.fromEvent(element, eventName, [selector])</code><br>将一个元素上的事件转化为Observable<br>使用Jquery，zepto，Backbone.Marionette,AngularJs和Ember.js的库方法，并且如果不存在，则退回到本地绑定，如果您使用AMD，您需要将这些库作为RsJs的依赖关系包括在requirejs配置文件中，当决定使用哪个库时，RxJs将尝试检测它们的存在。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> input = $(input);</div><div class="line"><span class="keyword">var</span> spurce = Rx.Observable.fromEvent(input, <span class="string">'click'</span>)</div><div class="line"><span class="keyword">var</span> subscription = source.subscribe(</div><div class="line">  <span class="function"><span class="params">x</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'Next: clicked!'</span>),</div><div class="line">  err =&gt; <span class="built_in">console</span>.error(<span class="string">'Error:'</span> + err),</div><div class="line">  () =&gt; <span class="built_in">console</span>.log(<span class="string">'Completed'</span>)</div><div class="line">)</div><div class="line">input.trigger(<span class="string">'click'</span>);</div><div class="line"></div><div class="line"><span class="comment">// for nodejs</span></div><div class="line"><span class="keyword">var</span> EventEmitter = <span class="built_in">require</span>(<span class="string">'events'</span>).EventEmitter,</div><div class="line">  Rx = <span class="built_in">require</span>(<span class="string">'rx'</span>);</div><div class="line"><span class="keyword">var</span> em = <span class="keyword">new</span> EventEmitter();</div><div class="line"><span class="keyword">var</span> source = Rx.Observable.fromEvent(</div><div class="line">  eventEmiiter,</div><div class="line">  <span class="string">'data'</span>,</div><div class="line">  <span class="function"><span class="keyword">function</span>(<span class="params">args</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123; <span class="attr">foo</span>: args[<span class="number">0</span>], <span class="attr">bar</span>: args[<span class="number">1</span>] &#125;;</div><div class="line">  &#125;</div><div class="line">)</div><div class="line"></div><div class="line"><span class="keyword">var</span> subscription = source.subscribe(</div><div class="line">  <span class="function"><span class="params">x</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'Next:'</span>, x.foo, x.bar)</div><div class="line">  &#125;,</div><div class="line">  err =&gt; &#123;...&#125;,</div><div class="line">  () =&gt; &#123;...&#125;</div><div class="line">)</div><div class="line">em.emit(<span class="string">'data'</span>, <span class="string">'baz'</span>, <span class="string">'quux'</span>)</div></pre></td></tr></table></figure></p>
+<h3 id="fromEventPattern"><a href="#fromEventPattern" class="headerlink" title="fromEventPattern"></a>fromEventPattern</h3><p><code>Rx.Observable.fromEventPattern(addHandler, [removeHandler], [selector])</code><br>通过使用addHandler和removeHandler函数添加和删除处理程序，当输出Observable被订阅时，addHandler被调用，并且订阅被取消时调动removeHandler<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">addClickHandler</span>(<span class="params">handler</span>) </span>&#123;</div><div class="line">  <span class="built_in">document</span>.addEventListener(<span class="string">'click'</span>, handler);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">removeClickHandler</span>(<span class="params">handler</span>) </span>&#123;</div><div class="line">  <span class="built_in">document</span>.removeEventListener(<span class="string">'click'</span>, handler);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> clicks = Rx.Observable.fromEventPattern(</div><div class="line">  addClickHandler,</div><div class="line">  removeClickHandler</div><div class="line">);</div><div class="line">clicks.subscribe(<span class="function"><span class="params">x</span> =&gt;</span> <span class="built_in">console</span>.log(x))</div><div class="line"></div><div class="line"><span class="comment">// another example</span></div><div class="line"><span class="keyword">var</span> input = $(<span class="string">'#input'</span>);</div><div class="line"><span class="keyword">var</span> source = Rx.Observable.fromEventPattern(</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">add</span> (<span class="params">h</span>) </span>&#123;</div><div class="line">    input.bind(<span class="string">'click'</span>, h)</div><div class="line">  &#125;</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">remove</span>(<span class="params">h</span>) </span>&#123;</div><div class="line">    input.unbind(<span class="string">'click'</span>, h)</div><div class="line">  &#125;</div><div class="line">)</div><div class="line"><span class="keyword">var</span> subscription = source.subscribe(</div><div class="line">  <span class="function"><span class="params">x</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'Next: clicked'</span>),</div><div class="line">  err =&gt; <span class="built_in">console</span>.error(err),</div><div class="line">  () =&gt; <span class="built_in">console</span>.log(<span class="string">'complete'</span>)</div><div class="line">)</div><div class="line">input.trigger(<span class="string">'click'</span>);</div><div class="line">source.unsubscribe()</div></pre></td></tr></table></figure></p>
+<h3 id="fromPromise"><a href="#fromPromise" class="headerlink" title="fromPromise"></a>fromPromise</h3><p><code>public static fromPromsie(promise: Promise&lt;T&gt;, scheduler: Scheduler): Observable&lt;T&gt;</code><br>将一个Promise转为一个Observable<br>resove作为next发出，然后complete，失败输出error<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> result = Rx.Observable.fromPromise(fetch(<span class="string">'http://www.baidu.com'</span>))</div><div class="line">result.subscribe(<span class="function"><span class="params">x</span> =&gt;</span> <span class="built_in">console</span>.log(x), e =&gt; <span class="built_in">console</span>.error(e))</div></pre></td></tr></table></figure></p>
+<h3 id="interval"><a href="#interval" class="headerlink" title="interval"></a>interval</h3><p><code>public static interval(period: number, scheduler: Scheduler): Observable</code><br>返回一个周期性的、递增的方式发射值的Observable<br>interval返回一个Observable，它发出一个递增的无限整数序列，第一个参数为时间间隔，需要注意的是，第一发射不立即发送，而是在第一个周期过去之后发送，第二个参数，默认是用异步调度程序提供时间概念，但是可以将任何调度程序传递给它<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> numbers = Rx.Observable.interval(<span class="number">1000</span>);</div><div class="line">numbers.subscribe(<span class="function"><span class="params">x</span> =&gt;</span> <span class="built_in">console</span>.log(x))</div></pre></td></tr></table></figure></p>
+<h3 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h3><p><code>public static merge(observable:...Observable, concurrent: number, scheduler: Scheduler): Observable&lt;T&gt;</code><br>创建一个发射所有被合并的observable所发射的值</p>
+<h3 id="never"><a href="#never" class="headerlink" title="never"></a>never</h3><p><code>public static never():Observable</code><br>创建一个不发射任何值next,error,complete的Observable<br>作用:用于测试或与其他Observable组合。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 下面代码会产生值,如果不加，不会产生任何值</span></div><div class="line"><span class="keyword">var</span> x = Rx.Observable.never().startWidth(<span class="number">2</span>);</div><div class="line">x.subscribe(</div><div class="line">  next: <span class="function"><span class="params">v</span> =&gt;</span> <span class="built_in">console</span>.log(v)   <span class="comment">// 2</span></div><div class="line">)</div></pre></td></tr></table></figure></p>
+<h3 id="of"><a href="#of" class="headerlink" title="of"></a>of</h3><p><code>public static of(values:...T, scheduler: Scheduler): Observable</code><br>创建一个Observable，发射指定参数的值，一个接一个，最后发出complete</p>
+<h3 id="range"><a href="#range" class="headerlink" title="range"></a>range</h3><p><code>public static range(start:number, count: number, scheduler: Scheduler): Observable&lt;T&gt;</code><br>创建发射一个数字序列的observable<br>所以range(0,10) =&gt; 0~9<br>range(1,10) =&gt; 1~10</p>
+<h3 id="throw"><a href="#throw" class="headerlink" title="throw"></a>throw</h3><p><code>public static throw(error: any, scheduler: Scheduler): Observable</code><br>创建一个只发出error通知的Observable，用于与其他Observable合并，如mergeMap<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> result = Rx.Observable.throw(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'oops'</span>)).startWith(<span class="number">7</span>)</div><div class="line">result.subscribe(<span class="function"><span class="params">x</span> =&gt;</span> <span class="built_in">console</span>.log(x), e =&gt; <span class="built_in">console</span>.error(e));</div><div class="line"><span class="comment">// 输出: 7  Error:oops!</span></div><div class="line"><span class="comment">// 结论startWith会next最前面</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> interval = Rx.Observable.interval(<span class="number">1000</span>);</div><div class="line"><span class="keyword">var</span> result = interval.mergeMap(<span class="function"><span class="params">x</span> =&gt;</span> &#123;</div><div class="line">  <span class="keyword">return</span> x === <span class="number">13</span></div><div class="line">    ? Rx.Observable.throw(<span class="string">'Thirteens are bad'</span>)</div><div class="line">    : Rx.Observable.of(<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>)</div><div class="line">&#125;)</div><div class="line">result.subscribe(</div><div class="line">  <span class="function"><span class="params">x</span> =&gt;</span> <span class="built_in">console</span>.log(x),</div><div class="line">  e =&gt; <span class="built_in">console</span>.error(e),</div><div class="line">  () =&gt; &#123;&#125;</div><div class="line">)</div><div class="line"><span class="comment">// 结论mergeMap可以在时间上作用，每隔1s输出abc,13次终止</span></div></pre></td></tr></table></figure></p>
+<h3 id="timer"><a href="#timer" class="headerlink" title="timer"></a>timer</h3><p><code>public static timer(initialDelay: number|Date, period: number, scheduler): Observable&lt;T&gt;</code><br>和interval差不多，只不过第一个参数可以指定初始延迟执行事件，第二个是后面延迟间隔</p>
+<h3 id="toAsync"><a href="#toAsync" class="headerlink" title="toAsync"></a>toAsync</h3><p>Rx.Observable.toAsync(function: Function, [scheduler], [context]): Function<br>将函数转换为异步函数，生成的一步函数的每次调用都会导致调用指定调度程序上的原始同步函数<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> func = Rx.Observable.toAsync(<span class="function">(<span class="params">x, y</span>) =&gt;</span> &#123;</div><div class="line">  <span class="keyword">return</span> x + y;</div><div class="line">&#125;);</div><div class="line"><span class="comment">// 注意该操作符返回的不是observable，而是一个异步函数，当异步函数被调用后</span></div><div class="line"><span class="comment">// (注意，调用并未立即执行)，返回一个observable，该observable被订阅时，原// 函数才被执行，并返回值</span></div><div class="line"><span class="comment">// Execute function with 3 and 4</span></div><div class="line"><span class="keyword">var</span> source = func(<span class="number">3</span>, <span class="number">4</span>);</div><div class="line"><span class="keyword">var</span> subscription = source.subscribe(</div><div class="line">  <span class="function"><span class="params">x</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'Next'</span> + x), <span class="number">7</span></div><div class="line">  err =&gt; <span class="built_in">console</span>.log(<span class="string">'Error'</span> + err),</div><div class="line">  () =&gt; <span class="built_in">console</span>.log(<span class="string">'completed!'</span>)</div><div class="line">)</div></pre></td></tr></table></figure></p>
+<h3 id="using"><a href="#using" class="headerlink" title="using"></a>using</h3><h3 id="when"><a href="#when" class="headerlink" title="when"></a>when</h3><h3 id="while"><a href="#while" class="headerlink" title="while"></a>while</h3><h3 id="wrap"><a href="#wrap" class="headerlink" title="wrap"></a>wrap</h3><h3 id="webSocket"><a href="#webSocket" class="headerlink" title="webSocket"></a>webSocket</h3><h3 id="zip"><a href="#zip" class="headerlink" title="zip"></a>zip</h3><h2 id="public-static-zip-observables-Observable-lt-R-gt"><a href="#public-static-zip-observables-Observable-lt-R-gt" class="headerlink" title="public static zip(observables: *): Observable&lt;R&gt;"></a><code>public static zip(observables: *): Observable&lt;R&gt;</code></h2><h2 id="Instance-Operators"><a href="#Instance-Operators" class="headerlink" title="Instance Operators"></a>Instance Operators</h2><h3 id="audit"><a href="#audit" class="headerlink" title="audit"></a>audit</h3><p><code>public audit(durationSelector: function(value:T): Observable): Observable&lt;T&gt;</code><br>在某个持续时间段内忽略原始observable发射的值，该方法的参数为一个函数，该函数需返回一个决定持续时长的observable或promise。之后从原始observable发射最近的值，不断重复这个过程<br>audit很像auditTime，但是其持续时长由第二个observable所决定<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> clicks = Rx.Observable.fromEvent(<span class="built_in">document</span>, <span class="string">'click'</span>);</div><div class="line"><span class="keyword">var</span> result = clicks.audit(<span class="function"><span class="params">ev</span> =&gt;</span> Rx.Observable.interval(<span class="number">1000</span>));</div><div class="line">result.subscribe(<span class="function"><span class="params">x</span> =&gt;</span> <span class="built_in">console</span>.log(x));</div><div class="line"><span class="comment">// 每秒只会有一次单击会被发射，发射时间点为每隔1秒</span></div></pre></td></tr></table></figure></p>
+<h3 id="auditTime"><a href="#auditTime" class="headerlink" title="auditTime"></a>auditTime</h3><p><code>public auditTime(durationTime: number, [scheduler, Scheduler]): Observable</code><br>在某个时间段内，忽略原始observable发射的值，该段时间由设定的duration的值(单位为ms)来决定，每隔一个设定的时间段，将从原始的observable发射最近的值，不断重复这个过程。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> clicks = Rx.Observable.fromEvent(<span class="built_in">document</span>, <span class="string">'click'</span>);</div><div class="line"><span class="keyword">var</span> result = clicks.auditTime(<span class="number">1000</span>);</div><div class="line">result.subscribe(<span class="function"><span class="params">x</span> =&gt;</span> <span class="built_in">console</span>.log(x));</div></pre></td></tr></table></figure></p>
+<h3 id="buffer"><a href="#buffer" class="headerlink" title="buffer"></a>buffer</h3><p><code>public buffer(closingNotifier: Observable): Observable&lt;T[]&gt;</code><br>缓存原始observable发射的值，直到作为参数的另一个observable发射了值，之后返回一个由这些缓存值组成的数组.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> clicks = Rx.Observable.fromEvent(<span class="built_in">document</span>, <span class="string">'click'</span>);</div><div class="line"><span class="keyword">var</span> interval = Rx.Observable.interval(<span class="number">1000</span>);</div><div class="line"><span class="keyword">var</span> buffered = interval.buffer(clicks);</div><div class="line">buffered.subscribe(<span class="function"><span class="params">x</span> =&gt;</span> <span class="built_in">console</span>.log(x));</div></pre></td></tr></table></figure></p>
+<h3 id="bufferCount"><a href="#bufferCount" class="headerlink" title="bufferCount"></a>bufferCount</h3><p><code>public bufferCount(bufferSize: Number, startBufferEvery): Observable&lt;T[]&gt;</code><br>缓存原始observable发射的值，直到达到bufferSize给定的上限<br>var clicks = Rx.Observable.fromEvent(document, ‘click’);<br>var buffered = clicks.bufferCount(2);<br>buffered.subscribe(x =&gt; console.log(x));</p>
+<h3 id="bufferTime"><a href="#bufferTime" class="headerlink" title="bufferTime"></a>bufferTime</h3><p><code>public bufferTime(bufferTimeSpan: number, [bufferCreationInterval: number], [maxBufferSize: number],[scheduler: Scheduler]): Observable&lt;T[]&gt;</code><br><code>params:
+  arg1: 必选，buffertTimeSpan发射值得时间间隔
+  arg2: 可选，设置打开缓存区和发射值的事件间隔
+  arg3: 可选，设置缓存区长度
+  scheduler: 可选</code><br>var clicks = Rx.Observable.fromEvent(document, ‘click’)<br>var buffered = clicks.bufferTime(1000);<br>buffered.subscribe(x =&gt; console.log(x));</p>
+<h3 id="bufferToggle"><a href="#bufferToggle" class="headerlink" title="bufferToggle"></a>bufferToggle</h3><p><code>public bufferToggle(openings: SubscribableOrPromise&lt;O&gt;, closingSelector: function(value: O): SubscribleOrPromise): Observable&lt;T[]&gt;</code><br>以数组形式收集过去的值，在opening发射值时开始收集，并调动closingSelector函数获取一个Observable，以告知何时关闭缓存区<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> clicks = Rx.Observable.fromEvent(<span class="built_in">document</span>, <span class="string">'click'</span>);</div><div class="line"><span class="keyword">var</span> openings = Rx.Observable.interval(<span class="number">1000</span>);</div><div class="line"><span class="keyword">var</span> buffered = clicks.bufferToggle(openings, i =&gt;</div><div class="line">  i % <span class="number">2</span> ? Rx.Observable.interval(<span class="number">500</span>) : Rx.Observable.empty())</div><div class="line">buffered.subscribe(<span class="function"><span class="params">x</span> =&gt;</span> <span class="built_in">console</span>.log(x));</div></pre></td></tr></table></figure></p>
+<h3 id="bufferWhen"><a href="#bufferWhen" class="headerlink" title="bufferWhen"></a>bufferWhen</h3><p><code>public bufferWhen(closingSelector: function (): Observable): Observable&lt;T[]&gt;</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> clicks = Rx.Observable.fromEvent(<span class="built_in">document</span>, <span class="string">'click'</span>)</div><div class="line"><span class="keyword">var</span> buffered = clicks.bufferWhen(<span class="function"><span class="params">()</span> =&gt;</span> </div><div class="line">  Rx.Observable.interval(<span class="number">1000</span> + <span class="built_in">Math</span>.random() * <span class="number">4000</span>));</div><div class="line">buffered.subscribe(<span class="function"><span class="params">x</span> =&gt;</span> <span class="built_in">console</span>.log(x));</div></pre></td></tr></table></figure></p>
+<h3 id="catch"><a href="#catch" class="headerlink" title="catch"></a>catch</h3><p><code>public catch(selector: function): Observable</code><br>参数为一个函数:它接收作为参数err,这是错误，并捕获。需要注意的是，如果是用了该操作符，observer的error方法不会被执行，因为错误已经被catch操作符捕获。<br>此外，不可以使用try…catch，因为代码块是同步执行的</p>
+<h3 id="combineAll"><a href="#combineAll" class="headerlink" title="combineAll"></a>combineAll</h3><h3 id="combineLatest"><a href="#combineLatest" class="headerlink" title="combineLatest"></a>combineLatest</h3><p>`public static combineLatest(observable1: Observable, observale2: Observable, project: function, scheduler: Scheduler)<br>组合多个Observable产生一个新的Observable，其发射值根据其每个输入Observable的最新值计算</p>
+<h3 id="throttleTime"><a href="#throttleTime" class="headerlink" title="throttleTime"></a>throttleTime</h3><h3 id="debounceTime"><a href="#debounceTime" class="headerlink" title="debounceTime"></a>debounceTime</h3><h3 id="takeUntil"><a href="#takeUntil" class="headerlink" title="takeUntil"></a>takeUntil</h3><p>…未完待续</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/25/Vue在JSX中使用全局安装的组件/" rel="next" title="Vue在JSX中使用全局安装的组件">
+                <i class="fa fa-chevron-left"></i> Vue在JSX中使用全局安装的组件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/27/Squid切换到https代理/" rel="prev" title="Squid切换到https代理">
+                Squid切换到https代理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Telanx" />
+          <p class="site-author-name" itemprop="name">Telanx</p>
+           
+              <p class="site-description motion-element" itemprop="description">Where there is a will, there is a way!</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+        <!-- 网易云音乐 -->
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=677243&auto=1&height=66"></iframe>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#订阅发布-Iterator模式"><span class="nav-number">1.</span> <span class="nav-text">订阅发布+Iterator模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些基本概念"><span class="nav-number">2.</span> <span class="nav-text">一些基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用API"><span class="nav-number">3.</span> <span class="nav-text">常用API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Subject"><span class="nav-number">4.</span> <span class="nav-text">Subject</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Subscription"><span class="nav-number">5.</span> <span class="nav-text">Subscription</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scheduler调度者"><span class="nav-number">6.</span> <span class="nav-text">Scheduler调度者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对时间轴操作"><span class="nav-number">7.</span> <span class="nav-text">对时间轴操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#producing-values产生值"><span class="nav-number">8.</span> <span class="nav-text">producing values产生值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#concat顺序组合发出"><span class="nav-number">9.</span> <span class="nav-text">concat顺序组合发出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#combineLatest组合多个Observable生成一个新的Observable"><span class="nav-number">10.</span> <span class="nav-text">combineLatest组合多个Observable生成一个新的Observable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#defer"><span class="nav-number">11.</span> <span class="nav-text">defer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#empty"><span class="nav-number">12.</span> <span class="nav-text">empty</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#switchMap和mergeMap区别"><span class="nav-number">13.</span> <span class="nav-text">switchMap和mergeMap区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#forkJoin"><span class="nav-number">14.</span> <span class="nav-text">forkJoin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#from"><span class="nav-number">15.</span> <span class="nav-text">from</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fromEvent"><span class="nav-number">16.</span> <span class="nav-text">fromEvent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fromEventPattern"><span class="nav-number">17.</span> <span class="nav-text">fromEventPattern</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fromPromise"><span class="nav-number">18.</span> <span class="nav-text">fromPromise</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#interval"><span class="nav-number">19.</span> <span class="nav-text">interval</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#merge"><span class="nav-number">20.</span> <span class="nav-text">merge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#never"><span class="nav-number">21.</span> <span class="nav-text">never</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#of"><span class="nav-number">22.</span> <span class="nav-text">of</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#range"><span class="nav-number">23.</span> <span class="nav-text">range</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#throw"><span class="nav-number">24.</span> <span class="nav-text">throw</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#timer"><span class="nav-number">25.</span> <span class="nav-text">timer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#toAsync"><span class="nav-number">26.</span> <span class="nav-text">toAsync</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#using"><span class="nav-number">27.</span> <span class="nav-text">using</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#when"><span class="nav-number">28.</span> <span class="nav-text">when</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#while"><span class="nav-number">29.</span> <span class="nav-text">while</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wrap"><span class="nav-number">30.</span> <span class="nav-text">wrap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webSocket"><span class="nav-number">31.</span> <span class="nav-text">webSocket</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zip"><span class="nav-number">32.</span> <span class="nav-text">zip</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-static-zip-observables-Observable-lt-R-gt"><span class="nav-number"></span> <span class="nav-text">public static zip(observables: *): Observable<R></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Instance-Operators"><span class="nav-number"></span> <span class="nav-text">Instance Operators</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#audit"><span class="nav-number">1.</span> <span class="nav-text">audit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#auditTime"><span class="nav-number">2.</span> <span class="nav-text">auditTime</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#buffer"><span class="nav-number">3.</span> <span class="nav-text">buffer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bufferCount"><span class="nav-number">4.</span> <span class="nav-text">bufferCount</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bufferTime"><span class="nav-number">5.</span> <span class="nav-text">bufferTime</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bufferToggle"><span class="nav-number">6.</span> <span class="nav-text">bufferToggle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bufferWhen"><span class="nav-number">7.</span> <span class="nav-text">bufferWhen</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#catch"><span class="nav-number">8.</span> <span class="nav-text">catch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#combineAll"><span class="nav-number">9.</span> <span class="nav-text">combineAll</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#combineLatest"><span class="nav-number">10.</span> <span class="nav-text">combineLatest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#throttleTime"><span class="nav-number">11.</span> <span class="nav-text">throttleTime</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#debounceTime"><span class="nav-number">12.</span> <span class="nav-text">debounceTime</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#takeUntil"><span class="nav-number">13.</span> <span class="nav-text">takeUntil</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+      
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Telanx</span>
+</div>
+
+
+<div class="powered-by">
+  由Hexo & Mist@NextT 强力驱动
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv">0</span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv">0</span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://telanx.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/09/11/RxJs学习笔记/';
+          this.page.identifier = '2017/09/11/RxJs学习笔记/';
+          this.page.title = 'RxJs学习笔记';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://telanx.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

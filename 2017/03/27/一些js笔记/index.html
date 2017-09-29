@@ -88,19 +88,19 @@
 
 
 <meta name="description" content="本文主要内容是笔者学js以来记录的一些问题以及一些使用技巧。大部分都可以在网路上找到，因为时过久远，不保证所有链接都有效.
-生成包含n个元素的数组123456let generateArray = n =&amp;gt; Array(n + 1);                        // 这种网上看到的，比较多了，缺点是不可用map遍历,若非要遍历可以Array(n + 1).join(c).">
+生成包含n个元素的数组12345678let generateArray = n =&amp;gt; Array(n + 1);                        // 这种网上看到的，比较多了，缺点是不可用map遍历,若非要遍历可以Array(n + 1).join(c">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一些js笔记">
 <meta property="og:url" content="http://yoursite.com/2017/03/27/一些js笔记/index.html">
 <meta property="og:site_name" content="Telanx">
 <meta property="og:description" content="本文主要内容是笔者学js以来记录的一些问题以及一些使用技巧。大部分都可以在网路上找到，因为时过久远，不保证所有链接都有效.
-生成包含n个元素的数组123456let generateArray = n =&amp;gt; Array(n + 1);                        // 这种网上看到的，比较多了，缺点是不可用map遍历,若非要遍历可以Array(n + 1).join(c).">
+生成包含n个元素的数组12345678let generateArray = n =&amp;gt; Array(n + 1);                        // 这种网上看到的，比较多了，缺点是不可用map遍历,若非要遍历可以Array(n + 1).join(c">
 <meta property="og:image" content="http://yoursite.com/images/figure1.gif">
-<meta property="og:updated_time" content="2017-08-08T01:51:19.081Z">
+<meta property="og:updated_time" content="2017-09-11T10:24:49.731Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一些js笔记">
 <meta name="twitter:description" content="本文主要内容是笔者学js以来记录的一些问题以及一些使用技巧。大部分都可以在网路上找到，因为时过久远，不保证所有链接都有效.
-生成包含n个元素的数组123456let generateArray = n =&amp;gt; Array(n + 1);                        // 这种网上看到的，比较多了，缺点是不可用map遍历,若非要遍历可以Array(n + 1).join(c).">
+生成包含n个元素的数组12345678let generateArray = n =&amp;gt; Array(n + 1);                        // 这种网上看到的，比较多了，缺点是不可用map遍历,若非要遍历可以Array(n + 1).join(c">
 <meta name="twitter:image" content="http://yoursite.com/images/figure1.gif">
 
 
@@ -356,7 +356,7 @@
 
       
         <p>本文主要内容是笔者学js以来记录的一些问题以及一些使用技巧。大部分都可以在网路上找到，因为时过久远，不保证所有链接都有效.</p>
-<h4 id="生成包含n个元素的数组"><a href="#生成包含n个元素的数组" class="headerlink" title="生成包含n个元素的数组"></a>生成包含n个元素的数组</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> generateArray = <span class="function"><span class="params">n</span> =&gt;</span> <span class="built_in">Array</span>(n + <span class="number">1</span>);                        <span class="comment">// 这种网上看到的，比较多了，缺点是不可用map遍历,若非要遍历可以Array(n + 1).join(c).split(c)</span></div><div class="line"><span class="keyword">let</span> generateArray2 = <span class="function"><span class="params">n</span> =&gt;</span> <span class="built_in">Array</span>.apply(<span class="literal">null</span>, &#123; <span class="attr">length</span>: n &#125;);   <span class="comment">// 这种是在Vuejs里看到的，比较实用</span></div><div class="line"><span class="comment">// 应用：字符串复制</span></div><div class="line"><span class="keyword">let</span> copyStr = <span class="function">(<span class="params">str, n</span>) =&gt;</span> <span class="built_in">Array</span>(n + <span class="number">1</span>).join(str);</div><div class="line"><span class="comment">// 应用: 生成类似range数列</span></div><div class="line"><span class="keyword">let</span> range = <span class="function">(<span class="params">start, end</span>) =&gt;</span> <span class="built_in">Array</span>.apply(<span class="literal">null</span>, &#123; <span class="attr">length</span>: end - start + <span class="number">1</span>&#125;).map(<span class="function"><span class="params">()</span> =&gt;</span> start++);</div></pre></td></tr></table></figure>
+<h4 id="生成包含n个元素的数组"><a href="#生成包含n个元素的数组" class="headerlink" title="生成包含n个元素的数组"></a>生成包含n个元素的数组</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> generateArray = <span class="function"><span class="params">n</span> =&gt;</span> <span class="built_in">Array</span>(n + <span class="number">1</span>);                        <span class="comment">// 这种网上看到的，比较多了，缺点是不可用map遍历,若非要遍历可以Array(n + 1).join(c).split(c)</span></div><div class="line"><span class="keyword">let</span> generateArray2 = <span class="function"><span class="params">n</span> =&gt;</span> <span class="built_in">Array</span>.apply(<span class="literal">null</span>, &#123; <span class="attr">length</span>: n &#125;);   <span class="comment">// 这种是在Vuejs里看到的，比较实用</span></div><div class="line"><span class="keyword">let</span> generateArray3 = <span class="function"><span class="params">n</span> =&gt;</span> <span class="built_in">Array</span>(n).fill(<span class="literal">undefined</span>);</div><div class="line"></div><div class="line"><span class="comment">// 应用：字符串复制</span></div><div class="line"><span class="keyword">let</span> copyStr = <span class="function">(<span class="params">str, n</span>) =&gt;</span> <span class="built_in">Array</span>(n + <span class="number">1</span>).join(str);</div><div class="line"><span class="comment">// 应用: 生成类似range数列</span></div><div class="line"><span class="keyword">let</span> range = <span class="function">(<span class="params">start, end</span>) =&gt;</span> <span class="built_in">Array</span>.apply(<span class="literal">null</span>, &#123; <span class="attr">length</span>: end - start + <span class="number">1</span>&#125;).map(<span class="function"><span class="params">()</span> =&gt;</span> start++);</div></pre></td></tr></table></figure>
 <h4 id="ES6-let变量暂时性死区域DTZ"><a href="#ES6-let变量暂时性死区域DTZ" class="headerlink" title="ES6 let变量暂时性死区域DTZ"></a>ES6 let变量暂时性死区域DTZ</h4><p>参见阮一峰的<a href="http://es6.ruanyifeng.com/" target="_blank" rel="external">ES6教程</a></p>
 <blockquote>
 <p>ES6明确规定，如果区块中存在let和const命令，这个区块对于这些命令声明的变量，从一开始就形成封闭作用域。凡是在声明之前使用这些变量就会报错.  </p>
@@ -544,7 +544,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -557,7 +557,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
