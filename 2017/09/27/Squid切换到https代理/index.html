@@ -96,7 +96,7 @@
 <meta property="og:image" content="http://yoursite.com/images/cert.png">
 <meta property="og:image" content="http://yoursite.com/images/proxy.png">
 <meta property="og:image" content="http://yoursite.com/images/zard.png">
-<meta property="og:updated_time" content="2017-09-29T02:46:47.020Z">
+<meta property="og:updated_time" content="2017-09-29T02:59:22.381Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Squid切换到https代理">
 <meta name="twitter:description" content="最近使用Squid代理发现http代理没法用了，无法使用http代理上youtube或者facebook，只好寻思着切换到加密的https代理上。网上  搜了一下，Squid不支持ssl，需要手动重新编译支持ssl。  (…中间步骤略，详细参考网路上的教程)  编译完成之后，配置好浏览器代理，发现出现ERR_PROXY_CERTIFICATE_INVALID错误，并且网站无法打开,说明可以连上">
@@ -354,8 +354,8 @@
       
 
       
-        <p>  最近使用Squid代理发现http代理没法用了，无法使用http代理上youtube或者facebook，只好寻思着切换到加密的https代理上。网上<br>  搜了一下，Squid不支持ssl，需要手动重新编译支持ssl。<br>  (…中间步骤略，详细参考网路上的教程)<br>  编译完成之后，配置好浏览器代理，发现出现<code>ERR_PROXY_CERTIFICATE_INVALID</code>错误，并且网站无法打开,说明可以连上，但是由于其它原因无法使用代理。后面继续在网路上搜了下才知道，跟证书有关，而且通过ssl-open自己生成的证书好像没法使用，只好使用免费的SSL证书<code>letsencrypt</code>。</p>
-<p>  使用<code>letsencrypt</code>生成免费证书首先需要一个域名。需要一条A记录解析到VPS服务器IP，然后方可生成，生成后的证书替换掉原来的即可。然后再Squid配置文件中将<code>http_port</code>更改为<code>https_port</code>并配置好证书路径即可:<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https_port <span class="number">443</span> cert=<span class="regexp">/etc/</span>letsencrypt/live/https.vpn666.xin/cert.pem key=<span class="regexp">/etc/</span>letsencrypt/live/https.vpn666.xin/privkey.pem</div></pre></td></tr></table></figure></p>
+        <p>  最近使用Squid代理发现http代理没法用了，无法使用http代理上youtube或者facebook，只好寻思着切换到加密的https代理上。网上<br>  搜了一下，Squid不支持ssl，需要手动重新编译支持ssl。<br>  (…中间步骤略，详细参考网路上的教程)<br>  编译完成之后，配置好浏览器代理，发现出现<code>ERR_PROXY_CERTIFICATE_INVALID</code>错误，并且网站无法打开,说明可以连上，但是由于其它原因无法使用代理。后面继续在网路上搜了下才知道，跟证书有关，而且通过openssl自己生成的证书好像没法被chrome识别使用，只好使用免费的SSL证书<code>letsencrypt</code>。</p>
+<p>  使用<code>letsencrypt</code>生成免费证书首先需要一个域名。需要一条A记录解析到VPS服务器IP，然后方可生成，生成后的证书替换掉原来的即可。然后再Squid配置文件中<code>/etc/squid3/squid.conf</code>将<code>http_port</code>更改为<code>https_port</code>并配置好证书路径即可:<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https_port <span class="number">443</span> cert=<span class="regexp">/etc/</span>letsencrypt/live/https.vpn666.xin/cert.pem key=<span class="regexp">/etc/</span>letsencrypt/live/https.vpn666.xin/privkey.pem</div></pre></td></tr></table></figure></p>
 <p>  需要注意的是，免费证书有效期有限制，需要过期继续生成，这一点也是很无奈的。而且在浏览器中配置https代理时，不能填写IP地址，否则仍然出现<code>ERR_PROXY_CERTIFICATE_INVALID</code>错误,换成绑定的域名即可。</p>
 <p>  <img src="/images/cert.png" alt="免费证书"><br>  <img src="/images/proxy.png" alt="https代理"><br>  <img src="/images/zard.png" alt="ZARD"></p>
 
